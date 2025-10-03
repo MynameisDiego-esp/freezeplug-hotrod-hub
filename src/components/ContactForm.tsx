@@ -18,12 +18,12 @@ const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const mailtoLink = `mailto:info@freezeplugs.com?subject=Information Request from ${formData.name}&body=Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    const mailtoLink = `mailto:info@freezeplugs.com?subject=Solicitud de Información de ${formData.name}&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ATeléfono: ${formData.phone}%0D%0A%0D%0AMensaje:%0D%0A${formData.message}`;
     
     window.location.href = mailtoLink;
     
-    toast.success("Opening email client...", {
-      description: "Your default email application will open"
+    toast.success("Abriendo cliente de correo...", {
+      description: "Se abrirá tu aplicación de correo predeterminada"
     });
 
     setFormData({ name: "", email: "", phone: "", message: "" });
@@ -39,39 +39,39 @@ const ContactForm = () => {
                 <MessageSquare className="w-6 h-6 text-primary" />
               </div>
               <CardTitle className="text-3xl font-black">
-                Request <span className="text-primary">Information</span>
+                Solicitar <span className="text-primary">Información</span>
               </CardTitle>
               <CardDescription className="text-base">
-                Have questions? Get in touch with our team
+                ¿Tienes preguntas? Contacta a nuestro equipo
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name *</Label>
+                  <Label htmlFor="name">Nombre *</Label>
                   <Input
                     id="name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    placeholder="Your name"
+                    placeholder="Tu nombre"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email">Correo Electrónico *</Label>
                   <Input
                     id="email"
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    placeholder="your@email.com"
+                    placeholder="tu@correo.com"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone">Teléfono</Label>
                   <Input
                     id="phone"
                     type="tel"
@@ -82,20 +82,20 @@ const ContactForm = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
+                  <Label htmlFor="message">Mensaje *</Label>
                   <Textarea
                     id="message"
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    placeholder="Tell us about your project or inquiry..."
+                    placeholder="Cuéntanos sobre tu proyecto o consulta..."
                     rows={5}
                   />
                 </div>
 
                 <Button type="submit" variant="racing" size="lg" className="w-full">
                   <Mail className="mr-2" />
-                  Send Message
+                  Enviar Mensaje
                 </Button>
               </form>
             </CardContent>

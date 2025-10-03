@@ -7,22 +7,22 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-black text-primary mb-4">FREEZE PLUGS</h3>
+            <h3 className="text-2xl font-black text-primary mb-4">TAPONES MONOBLOQUE</h3>
             <p className="text-background/80 mb-4">
-              Premium monoblock freeze plugs for muscle cars and high-performance engines. Quality engineered for reliability.
+              Tapones de congelación monobloque premium para muscle cars y motores de alto rendimiento. Calidad diseñada para confiabilidad.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4 text-primary">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-4 text-primary">Enlaces Rápidos</h4>
             <ul className="space-y-2">
               <li>
                 <button 
                   onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
-                  Products
+                  Productos
                 </button>
               </li>
               <li>
@@ -30,7 +30,7 @@ const Footer = () => {
                   onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
-                  Place Order
+                  Realizar Pedido
                 </button>
               </li>
               <li>
@@ -38,7 +38,7 @@ const Footer = () => {
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
-                  Contact Us
+                  Contáctanos
                 </button>
               </li>
             </ul>
@@ -46,7 +46,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-bold mb-4 text-primary">Contact</h4>
+            <h4 className="text-lg font-bold mb-4 text-primary">Contacto</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-background/80">
                 <Mail className="w-5 h-5 text-primary" />
@@ -58,14 +58,14 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-background/80">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span>Industrial District, USA</span>
+                <span>Zona Industrial, México</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-background/20 text-center text-background/60">
-          <p>&copy; {new Date().getFullYear()} Freeze Plugs Factory. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Fábrica de Tapones Monobloque. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

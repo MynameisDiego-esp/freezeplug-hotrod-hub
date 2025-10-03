@@ -22,16 +22,16 @@ const Hero = () => {
         <div className="max-w-3xl">
           <div className="inline-block mb-6">
             <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-foreground/50 backdrop-blur-sm rounded-full">
-              Premium Engineering
+              Ingeniería Premium
             </span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black mb-6 text-background">
-            Monoblock <span className="text-primary">Freeze Plugs</span>
+            Tapones de Congelación <span className="text-primary">Monobloque</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-background/90 max-w-2xl">
-            High-performance engine components built for muscle car enthusiasts and professional mechanics. Quality you can trust, power you can feel.
+            Componentes de motor de alto rendimiento construidos para entusiastas de muscle cars y mecánicos profesionales. Calidad en la que puedes confiar, potencia que puedes sentir.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -41,7 +41,7 @@ const Hero = () => {
               onClick={scrollToProducts}
               className="group"
             >
-              View Products
+              Ver Productos
               <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
             </Button>
             <Button 
@@ -50,7 +50,7 @@ const Hero = () => {
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-background/10 backdrop-blur-sm border-background/30 text-background hover:bg-background hover:text-foreground"
             >
-              Get Quote
+              Solicitar Cotización
             </Button>
           </div>
         </div>

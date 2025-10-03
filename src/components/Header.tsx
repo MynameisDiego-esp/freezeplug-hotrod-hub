@@ -16,7 +16,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-black text-primary">FREEZE PLUGS</h1>
+            <h1 className="text-2xl font-black text-primary">TAPONES MONOBLOQUE</h1>
           </div>
 
           {/* Desktop Navigation */}
@@ -25,26 +25,26 @@ const Header = () => {
               onClick={() => scrollToSection('products')}
               className="text-background hover:text-primary transition-colors font-medium"
             >
-              Products
+              Productos
             </button>
             <button 
               onClick={() => scrollToSection('order-form')}
               className="text-background hover:text-primary transition-colors font-medium"
             >
-              Order
+              Pedidos
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
               className="text-background hover:text-primary transition-colors font-medium"
             >
-              Contact
+              Contacto
             </button>
             <Button 
               variant="racing" 
               size="sm"
               onClick={() => scrollToSection('order-form')}
             >
-              Get Quote
+              Cotizar
             </Button>
           </nav>
 
@@ -64,19 +64,19 @@ const Header = () => {
               onClick={() => scrollToSection('products')}
               className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
             >
-              Products
+              Productos
             </button>
             <button 
               onClick={() => scrollToSection('order-form')}
               className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
             >
-              Order
+              Pedidos
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
               className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
             >
-              Contact
+              Contacto
             </button>
             <Button 
               variant="racing" 
@@ -84,7 +84,7 @@ const Header = () => {
               className="w-full"
               onClick={() => scrollToSection('order-form')}
             >
-              Get Quote
+              Cotizar
             </Button>
           </div>
         )}

@@ -4,9 +4,9 @@ import engineDetail from "@/assets/engine-detail.jpg";
 
 const Gallery = () => {
   const images = [
-    { src: muscleCar1, alt: "Classic muscle car showcase" },
-    { src: muscleCar2, alt: "Vintage American muscle car" },
-    { src: engineDetail, alt: "High-performance engine detail" },
+    { src: muscleCar1, alt: "Muscle car clásico en exhibición" },
+    { src: muscleCar2, alt: "Muscle car americano vintage" },
+    { src: engineDetail, alt: "Detalle de motor de alto rendimiento" },
   ];
 
   return (
@@ -14,10 +14,10 @@ const Gallery = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-black mb-4">
-            Built for <span className="text-accent">Power</span>
+            Construidos para la <span className="text-accent">Potencia</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Our freeze plugs are trusted by muscle car enthusiasts and mechanics worldwide
+            Nuestros tapones son confiados por entusiastas de muscle cars y mecánicos en todo el mundo
           </p>
         </div>
 
