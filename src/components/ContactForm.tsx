@@ -18,7 +18,7 @@ const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const mailtoLink = `mailto:info@freezeplugs.com?subject=Solicitud de Información de ${formData.name}&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ATeléfono: ${formData.phone}%0D%0A%0D%0AMensaje:%0D%0A${formData.message}`;
+    const mailtoLink = `mailto:prokarplugs@outlook.com?subject=Solicitud de Información de ${formData.name}&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ATeléfono: ${formData.phone}%0D%0A%0D%0AMensaje:%0D%0A${formData.message}`;
     
     window.location.href = mailtoLink;
     

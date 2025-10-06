@@ -10,7 +10,6 @@ interface Product {
   name: string;
   size: string;
   material: string;
-  price: string;
   description: string;
 }
 
@@ -20,7 +19,6 @@ const products: Product[] = [
     name: "Set Estándar de Tapones",
     size: "1.5\" - 2.0\"",
     material: "Acero",
-    price: "$45.00",
     description: "Set completo para motores small block"
   },
   {
@@ -28,7 +26,6 @@ const products: Product[] = [
     name: "Kit Big Block",
     size: "2.0\" - 2.5\"",
     material: "Latón",
-    price: "$65.00",
     description: "Construcción robusta de latón para V8 big block"
   },
   {
@@ -36,7 +33,6 @@ const products: Product[] = [
     name: "Set de Rendimiento",
     size: "Varios",
     material: "Acero Inoxidable",
-    price: "$89.00",
     description: "Acero inoxidable premium para construcciones de alto rendimiento"
   },
   {
@@ -44,7 +40,6 @@ const products: Product[] = [
     name: "Kit Universal",
     size: "1.0\" - 2.5\"",
     material: "Acero",
-    price: "$55.00",
     description: "Kit versátil para varias aplicaciones de motor"
   },
   {
@@ -52,7 +47,6 @@ const products: Product[] = [
     name: "Set Grado Competición",
     size: "2.0\" - 2.25\"",
     material: "Aluminio",
-    price: "$95.00",
     description: "Aluminio ligero para aplicaciones de carreras"
   },
   {
@@ -60,7 +54,6 @@ const products: Product[] = [
     name: "Kit Muscle Car Clásico",
     size: "1.75\" - 2.5\"",
     material: "Latón",
-    price: "$75.00",
     description: "Diseñado específicamente para muscle cars de los 60s-70s"
   },
 ];
@@ -114,7 +107,6 @@ const Products = () => {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <CardTitle className="text-xl">{product.name}</CardTitle>
-                  <span className="text-accent font-bold text-lg">{product.price}</span>
                 </div>
                 <CardDescription>{product.description}</CardDescription>
               </CardHeader>

@@ -16,7 +16,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-black text-primary">TAPONES MONOBLOQUE</h1>
+            <h1 className="text-2xl font-black text-primary">PROKAR</h1>
           </div>
 
           {/* Desktop Navigation */}
