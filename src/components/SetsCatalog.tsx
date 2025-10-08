@@ -1,6 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import freezePlugSetsImage from "@/assets/freeze-plug-sets.jpg";
+import freezePlugSetsImage from "@/assets/sellos1.jpg";
 
 interface SetItem {
   numeroParte: string;

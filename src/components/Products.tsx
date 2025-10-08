@@ -5,56 +5,70 @@ import { Button } from "@/components/ui/button";
 import { Search, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 
+// Importaciones de imágenes
+import fzb1Image from "@/assets/FZB-12.jpg";
+import fzb2Image from "@/assets/FZB-2.jpg";
+import fzb3And4Image from "@/assets/FZB-3-AND-4-2.jpg";
+import fss1Image from "@/assets/FSS-1-2.jpg";
+import fzb10Image from "@/assets/doble-storage-cart-2.jpg";
+
 interface Product {
   id: string;
   name: string;
   size: string;
   material: string;
   description: string;
+  image: string;
 }
 
 const products: Product[] = [
   {
-    id: "FP-001",
-    name: "Set Estándar de Tapones",
+    id: "FZB-1",
+    name: "Brass Dodge Assortment Case",
     size: "1.5\" - 2.0\"",
-    material: "Acero",
-    description: "Set completo para motores small block"
+    material: "Latón",
+    description: "Set completo para motores small block",
+    image: fzb1Image
   },
   {
-    id: "FP-002",
-    name: "Kit Big Block",
+    id: "FZB-2",
+    name: "Brass Toyota Assortment Case",
     size: "2.0\" - 2.5\"",
     material: "Latón",
-    description: "Construcción robusta de latón para V8 big block"
+    description: "Construcción robusta de latón para V8 big block",
+    image: fzb2Image
   },
   {
-    id: "FP-003",
-    name: "Set de Rendimiento",
+    id: "FZB-3",
+    name: "Brass Chevrolet Assortment Case",
     size: "Varios",
-    material: "Acero Inoxidable",
-    description: "Acero inoxidable premium para construcciones de alto rendimiento"
+    material: "Latón",
+    description: "Acero inoxidable premium para construcciones de alto rendimiento",
+    image: fzb3And4Image
   },
   {
-    id: "FP-004",
-    name: "Kit Universal",
+    id: "FZB-4",
+    name: "Brass Ford Assortment Case",
     size: "1.0\" - 2.5\"",
-    material: "Acero",
-    description: "Kit versátil para varias aplicaciones de motor"
+    material: "Latón",
+    description: "Kit versátil para varias aplicaciones de motor",
+    image: fzb3And4Image
   },
   {
-    id: "FP-005",
-    name: "Set Grado Competición",
+    id: "FSS-1",
+    name: "Stainless Steel Assortment Case",
     size: "2.0\" - 2.25\"",
-    material: "Aluminio",
-    description: "Aluminio ligero para aplicaciones de carreras"
+    material: "Acero Inoxidable",
+    description: "Aluminio ligero para aplicaciones de carreras",
+    image: fss1Image
   },
   {
-    id: "FP-006",
-    name: "Kit Muscle Car Clásico",
+    id: "FZB-10",
+    name: "Brass Complete Shop Stock Cart",
     size: "1.75\" - 2.5\"",
     material: "Latón",
-    description: "Diseñado específicamente para muscle cars de los 60s-70s"
+    description: "Este carro completo de tapones de latón está diseñado para cubrir todas tus necesidades en el taller.",
+    image: fzb10Image
   },
 ];
 
@@ -103,11 +117,22 @@ const Products = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
-            <Card key={product.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-xl">{product.name}</CardTitle>
+            <Card key={product.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+              {/* Product Image */}
+              <div className="relative h-48 overflow-hidden bg-muted">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-bold">
+                  {product.id}
                 </div>
+              </div>
+
+              <CardHeader>
+                <CardTitle className="text-xl">{product.name}</CardTitle>
                 <CardDescription>{product.description}</CardDescription>
               </CardHeader>
               <CardContent>
@@ -119,10 +144,6 @@ const Products = () => {
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Material:</span>
                     <span className="font-medium">{product.material}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">SKU:</span>
-                    <span className="font-medium">{product.id}</span>
                   </div>
                 </div>
                 <Button 
