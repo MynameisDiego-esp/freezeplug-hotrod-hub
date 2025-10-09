@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `/#${id}`;
+    }
+    setIsMenuOpen(false);
+  };
+
+  const handleNavigation = (path: string) => {
     setIsMenuOpen(false);
   };
 
@@ -16,39 +27,84 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-black text-primary">PROKAR</h1>
+            <Link to="/" className="text-2xl font-black text-primary">
+              PROKAR
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('products')}
-              className="text-background hover:text-primary transition-colors font-medium"
-            >
-              Productos
-            </button>
-            <button 
-              onClick={() => scrollToSection('catalogo-sets')}
-              className="text-background hover:text-primary transition-colors font-medium"
-            >
-              Catálogo Sets
-            </button>
-            <button 
-              onClick={() => scrollToSection('order-form')}
-              className="text-background hover:text-primary transition-colors font-medium"
-            >
-              Pedidos
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="text-background hover:text-primary transition-colors font-medium"
-            >
-              Contacto
-            </button>
+            {isHome ? (
+              <>
+                <button 
+                  onClick={() => scrollToSection('products')}
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Productos
+                </button>
+                <Link 
+                  to="/catalogo-sets"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Catálogo Sets
+                </Link>
+                <Link 
+                  to="/plugs-individuales"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Plugs Individuales
+                </Link>
+                <button 
+                  onClick={() => scrollToSection('order-form')}
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Pedidos
+                </button>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Contacto
+                </button>
+              </>
+            ) : (
+              <>
+                <Link 
+                  to="/"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Inicio
+                </Link>
+                <Link 
+                  to="/catalogo-sets"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Catálogo Sets
+                </Link>
+                <Link 
+                  to="/plugs-individuales"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Plugs Individuales
+                </Link>
+                <Link 
+                  to="/#order-form"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Pedidos
+                </Link>
+                <Link 
+                  to="/#contact"
+                  className="text-background hover:text-primary transition-colors font-medium"
+                >
+                  Contacto
+                </Link>
+              </>
+            )}
             <Button 
               variant="racing" 
               size="sm"
-              onClick={() => scrollToSection('order-form')}
+              onClick={() => isHome ? scrollToSection('order-form') : window.location.href = '/#order-form'}
             >
               Cotizar
             </Button>
@@ -59,42 +115,92 @@ const Header = () => {
             className="md:hidden text-background"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Menu className="w-6 h-6" />
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 border-t border-primary/20">
-            <button 
-              onClick={() => scrollToSection('products')}
-              className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
-            >
-              Productos
-            </button>
-            <button 
-              onClick={() => scrollToSection('catalogo-sets')}
-              className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
-            >
-              Catálogo Sets
-            </button>
-            <button 
-              onClick={() => scrollToSection('order-form')}
-              className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
-            >
-              Pedidos
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
-            >
-              Contacto
-            </button>
+            {isHome ? (
+              <>
+                <button 
+                  onClick={() => scrollToSection('products')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Productos
+                </button>
+                <Link 
+                  to="/catalogo-sets"
+                  onClick={() => handleNavigation('/catalogo-sets')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Catálogo Sets
+                </Link>
+                <Link 
+                  to="/plugs-individuales"
+                  onClick={() => handleNavigation('/plugs-individuales')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Plugs Individuales
+                </Link>
+                <button 
+                  onClick={() => scrollToSection('order-form')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Pedidos
+                </button>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Contacto
+                </button>
+              </>
+            ) : (
+              <>
+                <Link 
+                  to="/"
+                  onClick={() => handleNavigation('/')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Inicio
+                </Link>
+                <Link 
+                  to="/catalogo-sets"
+                  onClick={() => handleNavigation('/catalogo-sets')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Catálogo Sets
+                </Link>
+                <Link 
+                  to="/plugs-individuales"
+                  onClick={() => handleNavigation('/plugs-individuales')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Plugs Individuales
+                </Link>
+                <Link 
+                  to="/#order-form"
+                  onClick={() => handleNavigation('/#order-form')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Pedidos
+                </Link>
+                <Link 
+                  to="/#contact"
+                  onClick={() => handleNavigation('/#contact')}
+                  className="block w-full text-left text-background hover:text-primary transition-colors font-medium py-2"
+                >
+                  Contacto
+                </Link>
+              </>
+            )}
             <Button 
               variant="racing" 
               size="sm"
               className="w-full"
-              onClick={() => scrollToSection('order-form')}
+              onClick={() => isHome ? scrollToSection('order-form') : window.location.href = '/#order-form'}
             >
               Cotizar
             </Button>
