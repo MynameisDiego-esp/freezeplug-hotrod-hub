@@ -50,15 +50,16 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-background/80">
                 <Mail className="w-5 h-5 text-primary" />
-                <span>info@freezeplugs.com</span>
+                <span>Prokarplug@gmail.com</span>
               </li>
               <li className="flex items-center gap-2 text-background/80">
                 <Phone className="w-5 h-5 text-primary" />
-                <span>(555) 123-4567</span>
+                <span>(619) 454-0801</span>
               </li>
               <li className="flex items-center gap-2 text-background/80">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span>Zona Industrial, México</span>
+                <span>Productos especiales S.A DE C.V, 1RO DE MAYO NO 1444, COLONIA LAS TORRES #22560
+</span>
               </li>
             </ul>
           </div>
