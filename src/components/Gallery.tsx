@@ -1,9 +1,15 @@
 import muscleCar1 from "@/assets/muscle-car-1.jpg";
 import muscleCar2 from "@/assets/muscle-car-2.jpg";
 import engineDetail from "@/assets/engine-detail.jpg";
+import freezePlugsOrganized from "@/assets/freeze-plugs-organized.jpg";
+import freezePlugsInstallation from "@/assets/freeze-plugs-installation.jpg";
+import freezePlugsVariety from "@/assets/freeze-plugs-variety.jpg";
 
 const Gallery = () => {
   const images = [
+    { src: freezePlugsOrganized, alt: "Set completo de sellos de motor organizados" },
+    { src: freezePlugsInstallation, alt: "Instalación profesional de sellos de congelación" },
+    { src: freezePlugsVariety, alt: "Variedad de sellos en latón, acero y acero inoxidable" },
     { src: muscleCar1, alt: "Muscle car clásico en exhibición" },
     { src: muscleCar2, alt: "Muscle car americano vintage" },
     { src: engineDetail, alt: "Detalle de motor de alto rendimiento" },
@@ -21,7 +27,7 @@ const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image, index) => (
             <div
               key={index}

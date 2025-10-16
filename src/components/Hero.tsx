@@ -3,15 +3,17 @@ import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import heroEngine from "@/assets/hero-engine.jpg";
 import engineblock from "@/assets/engine-2.jpg";
+import freezePlugsHero from "@/assets/freeze-plugs-hero.jpg";
+import freezePlugsCollection from "@/assets/freeze-plugs-collection.jpg";
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const backgroundImages = [
+    freezePlugsHero,
+    freezePlugsCollection,
     heroEngine,
     engineblock,
-    "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1920&q=80",
-    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80",
   ];
 
   // Cambiar automáticamente cada 7 segundos
