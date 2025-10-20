@@ -6,5 +6,13 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "freezeplug-hotrod-hub"
+  base: "/freezeplug-hotrod-hub/",
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  server: {
+    port: 8080,
+  },
 });
