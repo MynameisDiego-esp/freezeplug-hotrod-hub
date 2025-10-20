@@ -112,6 +112,13 @@ const Products = () => {
     }
   };
 
+  const handleQuantityChange = (id: string, value: string) => {
+    const numValue = parseInt(value) || 0;
+    if (numValue >= 0) {
+      updateQuantity(id, numValue);
+    }
+  };
+
   return (
     <section id="products" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -182,7 +189,7 @@ const Products = () => {
                       Agregar al Carrito
                     </Button>
                   ) : (
-                    <div className="flex items-center justify-center gap-3 bg-muted rounded-md p-2">
+                    <div className="flex items-center justify-center gap-2 bg-muted rounded-md p-2">
                       <Button
                         size="icon"
                         variant="ghost"
@@ -190,7 +197,13 @@ const Products = () => {
                       >
                         <Minus className="w-4 h-4" />
                       </Button>
-                      <span className="font-bold text-lg min-w-[3rem] text-center">{quantity}</span>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={quantity}
+                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                        className="w-16 text-center font-bold h-8 px-1"
+                      />
                       <Button
                         size="icon"
                         variant="ghost"

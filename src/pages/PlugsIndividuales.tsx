@@ -1,9 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useState } from "react";
 import { Search, ShoppingCart, Plus, Minus } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
@@ -126,6 +127,13 @@ const PlugsIndividuales = () => {
     }
   };
 
+  const handleQuantityChange = (id: string, value: string) => {
+    const numValue = parseInt(value) || 0;
+    if (numValue >= 0) {
+      updateQuantity(id, numValue);
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -164,72 +172,101 @@ const PlugsIndividuales = () => {
                 </div>
               </div>
 
-              <div className="bg-card rounded-lg shadow-lg overflow-hidden">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-muted/50">
-                        <TableHead className="font-bold">Número de Parte</TableHead>
-                        <TableHead className="font-bold">Diámetro</TableHead>
-                        <TableHead className="font-bold">Tipo</TableHead>
-                        <TableHead className="font-bold">Material</TableHead>
-                        <TableHead className="font-bold">Aplicación</TableHead>
-                        <TableHead className="font-bold">Precio</TableHead>
-                        <TableHead className="font-bold text-center">Seleccionar</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredPlugs.map((plug, index) => {
-                        const quantity = getItemQuantity(plug.numeroParte);
-                        return (
-                          <TableRow key={index} className="hover:bg-muted/30">
-                            <TableCell className="font-medium">{plug.numeroParte}</TableCell>
-                            <TableCell>{plug.diametro}</TableCell>
-                            <TableCell>{plug.tipo}</TableCell>
-                            <TableCell>{plug.material}</TableCell>
-                            <TableCell>{plug.aplicacion}</TableCell>
-                            <TableCell>{plug.precio}</TableCell>
-                            <TableCell>
-                              <div className="flex items-center justify-center gap-2">
-                                {quantity === 0 ? (
-                                  <Button
-                                    size="sm"
-                                    variant="racing"
-                                    onClick={() => handleAddToCart(plug)}
-                                  >
-                                    <ShoppingCart className="w-4 h-4 mr-1" />
-                                    Agregar
-                                  </Button>
-                                ) : (
-                                  <div className="flex items-center gap-2 bg-muted rounded-md p-1">
-                                    <Button
-                                      size="icon"
-                                      variant="ghost"
-                                      className="h-8 w-8"
-                                      onClick={() => handleDecrement(plug.numeroParte)}
-                                    >
-                                      <Minus className="w-4 h-4" />
-                                    </Button>
-                                    <span className="font-bold min-w-[2rem] text-center">{quantity}</span>
-                                    <Button
-                                      size="icon"
-                                      variant="ghost"
-                                      className="h-8 w-8"
-                                      onClick={() => handleIncrement(plug.numeroParte)}
-                                    >
-                                      <Plus className="w-4 h-4" />
-                                    </Button>
-                                  </div>
-                                )}
+              <Accordion type="single" collapsible className="space-y-3">
+                {filteredPlugs.map((plug, index) => {
+                  const quantity = getItemQuantity(plug.numeroParte);
+                  return (
+                    <AccordionItem 
+                      key={index} 
+                      value={plug.numeroParte}
+                      className="bg-card rounded-lg shadow-md border-2 border-border overflow-hidden"
+                    >
+                      <AccordionTrigger className="px-6 py-4 hover:bg-muted/50">
+                        <div className="flex items-center justify-between w-full pr-4">
+                          <div className="flex items-center gap-4">
+                            <span className="font-bold text-primary text-lg">{plug.numeroParte}</span>
+                            <span className="text-muted-foreground">|</span>
+                            <span className="font-medium">{plug.diametro}</span>
+                            <span className="text-sm text-muted-foreground hidden md:inline">
+                              {plug.material}
+                            </span>
+                          </div>
+                          {quantity > 0 && (
+                            <div className="bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full mr-2">
+                              {quantity} en carrito
+                            </div>
+                          )}
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-6">
+                        <Card className="border-0 shadow-none">
+                          <CardContent className="pt-4 space-y-4">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                              <div>
+                                <p className="text-muted-foreground">Diámetro</p>
+                                <p className="font-semibold">{plug.diametro}</p>
                               </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
+                              <div>
+                                <p className="text-muted-foreground">Tipo</p>
+                                <p className="font-semibold">{plug.tipo}</p>
+                              </div>
+                              <div>
+                                <p className="text-muted-foreground">Material</p>
+                                <p className="font-semibold">{plug.material}</p>
+                              </div>
+                              <div>
+                                <p className="text-muted-foreground">Aplicación</p>
+                                <p className="font-semibold">{plug.aplicacion}</p>
+                              </div>
+                              <div>
+                                <p className="text-muted-foreground">Precio</p>
+                                <p className="font-semibold">{plug.precio}</p>
+                              </div>
+                            </div>
+                            
+                            <div className="pt-4 border-t">
+                              {quantity === 0 ? (
+                                <Button
+                                  variant="racing"
+                                  className="w-full"
+                                  onClick={() => handleAddToCart(plug)}
+                                >
+                                  <ShoppingCart className="w-4 h-4 mr-2" />
+                                  Agregar al Carrito
+                                </Button>
+                              ) : (
+                                <div className="flex items-center justify-center gap-3 bg-muted rounded-md p-3">
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={() => handleDecrement(plug.numeroParte)}
+                                  >
+                                    <Minus className="w-4 h-4" />
+                                  </Button>
+                                  <Input
+                                    type="number"
+                                    min="0"
+                                    value={quantity}
+                                    onChange={(e) => handleQuantityChange(plug.numeroParte, e.target.value)}
+                                    className="w-20 text-center font-bold text-lg h-10"
+                                  />
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={() => handleIncrement(plug.numeroParte)}
+                                  >
+                                    <Plus className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
 
               {filteredPlugs.length === 0 && (
                 <div className="text-center py-12">

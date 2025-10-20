@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Plus, Minus, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
@@ -237,6 +238,13 @@ const SetsCatalog = () => {
     }
   };
 
+  const handleQuantityChange = (id: string, value: string) => {
+    const numValue = parseInt(value) || 0;
+    if (numValue >= 0) {
+      updateQuantity(id, numValue);
+    }
+  };
+
   return (
     <section id="catalogo-sets" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -327,27 +335,33 @@ const SetsCatalog = () => {
                                       <ShoppingCart className="w-4 h-4 mr-1" />
                                       Agregar
                                     </Button>
-                                  ) : (
-                                    <div className="flex items-center gap-2 bg-muted rounded-md p-1">
-                                      <Button
-                                        size="icon"
-                                        variant="ghost"
-                                        className="h-8 w-8"
-                                        onClick={() => handleDecrement(item.numeroParte)}
-                                      >
-                                        <Minus className="w-4 h-4" />
-                                      </Button>
-                                      <span className="font-bold min-w-[2rem] text-center">{quantity}</span>
-                                      <Button
-                                        size="icon"
-                                        variant="ghost"
-                                        className="h-8 w-8"
-                                        onClick={() => handleIncrement(item.numeroParte)}
-                                      >
-                                        <Plus className="w-4 h-4" />
-                                      </Button>
-                                    </div>
-                                  )}
+                                   ) : (
+                                     <div className="flex items-center gap-1 bg-muted rounded-md p-1">
+                                       <Button
+                                         size="icon"
+                                         variant="ghost"
+                                         className="h-8 w-8"
+                                         onClick={() => handleDecrement(item.numeroParte)}
+                                       >
+                                         <Minus className="w-4 h-4" />
+                                       </Button>
+                                       <Input
+                                         type="number"
+                                         min="0"
+                                         value={quantity}
+                                         onChange={(e) => handleQuantityChange(item.numeroParte, e.target.value)}
+                                         className="w-14 text-center font-bold h-8 px-1"
+                                       />
+                                       <Button
+                                         size="icon"
+                                         variant="ghost"
+                                         className="h-8 w-8"
+                                         onClick={() => handleIncrement(item.numeroParte)}
+                                       >
+                                         <Plus className="w-4 h-4" />
+                                       </Button>
+                                     </div>
+                                   )}
                                 </div>
                               </TableCell>
                             </TableRow>
