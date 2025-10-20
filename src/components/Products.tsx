@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, Plus, Minus } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 
 // Importaciones de imágenes
@@ -74,6 +75,7 @@ const products: Product[] = [
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { items, addItem, updateQuantity } = useCart();
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -81,11 +83,33 @@ const Products = () => {
     product.material.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleOrder = (product: Product) => {
-    document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
-    toast.success(`${product.name} agregado al formulario de pedido`, {
-      description: "Por favor completa el formulario de pedido a continuación"
+  const getItemQuantity = (id: string) => {
+    const item = items.find(i => i.id === id);
+    return item ? item.quantity : 0;
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      type: 'product',
+      details: `${product.size} | ${product.material}`
     });
+    toast.success("Agregado al carrito", {
+      description: product.name
+    });
+  };
+
+  const handleIncrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    updateQuantity(id, currentQty + 1);
+  };
+
+  const handleDecrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    if (currentQty > 0) {
+      updateQuantity(id, currentQty - 1);
+    }
   };
 
   return (
@@ -116,47 +140,70 @@ const Products = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <Card key={product.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
-              {/* Product Image */}
-              <div className="relative h-48 overflow-hidden bg-muted">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-bold">
-                  {product.id}
+          {filteredProducts.map((product) => {
+            const quantity = getItemQuantity(product.id);
+            return (
+              <Card key={product.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+                {/* Product Image */}
+                <div className="relative h-48 overflow-hidden bg-muted">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-bold">
+                    {product.id}
+                  </div>
                 </div>
-              </div>
 
-              <CardHeader>
-                <CardTitle className="text-xl">{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tamaño:</span>
-                    <span className="font-medium">{product.size}</span>
+                <CardHeader>
+                  <CardTitle className="text-xl">{product.name}</CardTitle>
+                  <CardDescription>{product.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Tamaño:</span>
+                      <span className="font-medium">{product.size}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Material:</span>
+                      <span className="font-medium">{product.material}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Material:</span>
-                    <span className="font-medium">{product.material}</span>
-                  </div>
-                </div>
-                <Button 
-                  variant="racing" 
-                  className="w-full"
-                  onClick={() => handleOrder(product)}
-                >
-                  <ShoppingCart className="mr-2" />
-                  Ordenar Ahora
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                  {quantity === 0 ? (
+                    <Button 
+                      variant="racing" 
+                      className="w-full"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <ShoppingCart className="mr-2" />
+                      Agregar al Carrito
+                    </Button>
+                  ) : (
+                    <div className="flex items-center justify-center gap-3 bg-muted rounded-md p-2">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => handleDecrement(product.id)}
+                      >
+                        <Minus className="w-4 h-4" />
+                      </Button>
+                      <span className="font-bold text-lg min-w-[3rem] text-center">{quantity}</span>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => handleIncrement(product.id)}
+                      >
+                        <Plus className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {filteredProducts.length === 0 && (

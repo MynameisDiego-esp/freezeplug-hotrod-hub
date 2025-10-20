@@ -3,8 +3,11 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ShoppingCart, Plus, Minus } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 interface IndividualPlug {
   numeroParte: string;
@@ -84,6 +87,7 @@ const plugsData: IndividualPlug[] = [
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { items, addItem, updateQuantity } = useCart();
 
   const filteredPlugs = plugsData.filter(plug =>
     plug.numeroParte.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -92,6 +96,35 @@ const PlugsIndividuales = () => {
     plug.material.toLowerCase().includes(searchTerm.toLowerCase()) ||
     plug.aplicacion.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getItemQuantity = (id: string) => {
+    const item = items.find(i => i.id === id);
+    return item ? item.quantity : 0;
+  };
+
+  const handleAddToCart = (plug: IndividualPlug) => {
+    addItem({
+      id: plug.numeroParte,
+      name: `${plug.numeroParte} - ${plug.diametro}`,
+      type: 'individual',
+      details: `${plug.tipo} | ${plug.material} | ${plug.aplicacion}`
+    });
+    toast.success("Agregado al carrito", {
+      description: `${plug.numeroParte} - ${plug.diametro}`
+    });
+  };
+
+  const handleIncrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    updateQuantity(id, currentQty + 1);
+  };
+
+  const handleDecrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    if (currentQty > 0) {
+      updateQuantity(id, currentQty - 1);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -142,19 +175,57 @@ const PlugsIndividuales = () => {
                         <TableHead className="font-bold">Material</TableHead>
                         <TableHead className="font-bold">Aplicación</TableHead>
                         <TableHead className="font-bold">Precio</TableHead>
+                        <TableHead className="font-bold text-center">Seleccionar</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredPlugs.map((plug, index) => (
-                        <TableRow key={index} className="hover:bg-muted/30">
-                          <TableCell className="font-medium">{plug.numeroParte}</TableCell>
-                          <TableCell>{plug.diametro}</TableCell>
-                          <TableCell>{plug.tipo}</TableCell>
-                          <TableCell>{plug.material}</TableCell>
-                          <TableCell>{plug.aplicacion}</TableCell>
-                          <TableCell>{plug.precio}</TableCell>
-                        </TableRow>
-                      ))}
+                      {filteredPlugs.map((plug, index) => {
+                        const quantity = getItemQuantity(plug.numeroParte);
+                        return (
+                          <TableRow key={index} className="hover:bg-muted/30">
+                            <TableCell className="font-medium">{plug.numeroParte}</TableCell>
+                            <TableCell>{plug.diametro}</TableCell>
+                            <TableCell>{plug.tipo}</TableCell>
+                            <TableCell>{plug.material}</TableCell>
+                            <TableCell>{plug.aplicacion}</TableCell>
+                            <TableCell>{plug.precio}</TableCell>
+                            <TableCell>
+                              <div className="flex items-center justify-center gap-2">
+                                {quantity === 0 ? (
+                                  <Button
+                                    size="sm"
+                                    variant="racing"
+                                    onClick={() => handleAddToCart(plug)}
+                                  >
+                                    <ShoppingCart className="w-4 h-4 mr-1" />
+                                    Agregar
+                                  </Button>
+                                ) : (
+                                  <div className="flex items-center gap-2 bg-muted rounded-md p-1">
+                                    <Button
+                                      size="icon"
+                                      variant="ghost"
+                                      className="h-8 w-8"
+                                      onClick={() => handleDecrement(plug.numeroParte)}
+                                    >
+                                      <Minus className="w-4 h-4" />
+                                    </Button>
+                                    <span className="font-bold min-w-[2rem] text-center">{quantity}</span>
+                                    <Button
+                                      size="icon"
+                                      variant="ghost"
+                                      className="h-8 w-8"
+                                      onClick={() => handleIncrement(plug.numeroParte)}
+                                    >
+                                      <Plus className="w-4 h-4" />
+                                    </Button>
+                                  </div>
+                                )}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                     </TableBody>
                   </Table>
                 </div>

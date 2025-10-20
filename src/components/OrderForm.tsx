@@ -6,10 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ShoppingCart, Info } from "lucide-react";
+import { ShoppingCart, Info, Trash2 } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 
 const OrderForm = () => {
+  const { items, removeItem, getTotalItems, clearCart } = useCart();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,12 +22,29 @@ const OrderForm = () => {
     notes: ""
   });
 
+  const formatCartItems = () => {
+    if (items.length === 0) return "";
+    
+    let formatted = "\n\nProductos Seleccionados:\n-------------------\n";
+    items.forEach(item => {
+      formatted += `\n• ${item.name}\n`;
+      formatted += `  Cantidad: ${item.quantity}\n`;
+      if (item.details) {
+        formatted += `  Detalles: ${item.details}\n`;
+      }
+    });
+    formatted += `\nTotal de piezas: ${getTotalItems()}\n`;
+    return formatted;
+  };
+
   const handleSubmit = (tipo: 'cotizacion' | 'informacion') => (e: React.FormEvent) => {
     e.preventDefault();
     
     const subject = tipo === 'cotizacion' 
       ? `Solicitud de Cotización - ${formData.name}` 
       : `Solicitud de Información - ${formData.name}`;
+    
+    const cartItemsText = formatCartItems();
     
     const body = tipo === 'cotizacion'
       ? `SOLICITUD DE COTIZACIÓN
@@ -36,11 +55,11 @@ Nombre: ${formData.name}
 Email: ${formData.email}
 Teléfono: ${formData.phone}
 Empresa: ${formData.company}
-
-Detalles del Pedido:
+${cartItemsText}
+Detalles Adicionales:
 -------------------
-Producto: ${formData.product}
-Cantidad: ${formData.quantity} unidades
+Producto adicional: ${formData.product}
+Cantidad adicional: ${formData.quantity} unidades
 Notas adicionales: ${formData.notes}
 
 Por favor, envíe cotización formal con:
@@ -56,11 +75,11 @@ Nombre: ${formData.name}
 Email: ${formData.email}
 Teléfono: ${formData.phone}
 Empresa: ${formData.company}
-
+${cartItemsText}
 Consulta:
 -------------------
-Producto de interés: ${formData.product}
-Cantidad estimada: ${formData.quantity} unidades
+Producto de interés adicional: ${formData.product}
+Cantidad estimada adicional: ${formData.quantity} unidades
 Detalles: ${formData.notes}`;
     
     const mailtoLink = `mailto:orders@freezeplugs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -72,6 +91,7 @@ Detalles: ${formData.notes}`;
     });
 
     setFormData({ name: "", email: "", phone: "", company: "", product: "", quantity: "", notes: "" });
+    clearCart();
   };
 
   return (
@@ -87,13 +107,49 @@ Detalles: ${formData.notes}`;
             </p>
           </div>
 
+          {items.length > 0 && (
+            <Card className="border-2 border-accent mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Productos Seleccionados ({getTotalItems()} piezas)</span>
+                  <Button variant="ghost" size="sm" onClick={clearCart}>
+                    Limpiar todo
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-start justify-between p-3 bg-muted rounded-lg">
+                      <div className="flex-1">
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-sm text-muted-foreground">{item.details}</p>
+                        <p className="text-sm font-medium mt-1">Cantidad: {item.quantity}</p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => removeItem(item.id)}
+                        className="text-destructive hover:text-destructive"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           <Card className="border-2">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl font-black">
                 Solicita tu <span className="text-accent">Cotización o Información</span>
               </CardTitle>
               <CardDescription className="text-base">
-                Elige el tipo de solicitud y completa el formulario
+                {items.length > 0 
+                  ? "Tus productos seleccionados se incluirán automáticamente"
+                  : "Elige el tipo de solicitud y completa el formulario"}
               </CardDescription>
             </CardHeader>
             <CardContent>

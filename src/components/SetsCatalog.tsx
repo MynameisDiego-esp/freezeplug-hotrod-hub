@@ -1,5 +1,9 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Plus, Minus, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 import freezePlugSetsImage from "@/assets/sellos1.jpg";
 
 interface SetItem {
@@ -202,6 +206,37 @@ const catalogData: BrandCatalog[] = [
 ];
 
 const SetsCatalog = () => {
+  const { items, addItem, updateQuantity } = useCart();
+
+  const getItemQuantity = (id: string) => {
+    const item = items.find(i => i.id === id);
+    return item ? item.quantity : 0;
+  };
+
+  const handleAddToCart = (item: SetItem, marca: string) => {
+    addItem({
+      id: item.numeroParte,
+      name: `${marca} - ${item.aplicacion}`,
+      type: 'set',
+      details: `${item.ano} | ${item.cilindros} | ${item.cantidad}`
+    });
+    toast.success("Agregado al carrito", {
+      description: `${item.numeroParte} - ${item.aplicacion}`
+    });
+  };
+
+  const handleIncrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    updateQuantity(id, currentQty + 1);
+  };
+
+  const handleDecrement = (id: string) => {
+    const currentQty = getItemQuantity(id);
+    if (currentQty > 0) {
+      updateQuantity(id, currentQty - 1);
+    }
+  };
+
   return (
     <section id="catalogo-sets" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -265,21 +300,59 @@ const SetsCatalog = () => {
                           <TableHead className="font-bold">Pioneer</TableHead>
                           <TableHead className="font-bold">Locación</TableHead>
                           <TableHead className="font-bold">Cantidad</TableHead>
+                          <TableHead className="font-bold text-center">Seleccionar</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {brand.items.map((item, index) => (
-                          <TableRow key={index} className="hover:bg-muted/30">
-                            <TableCell className="font-medium">{item.numeroParte}</TableCell>
-                            <TableCell>{item.ano}</TableCell>
-                            <TableCell>{item.cilindros}</TableCell>
-                            <TableCell>{item.aplicacion}</TableCell>
-                            <TableCell>{item.usTool}</TableCell>
-                            <TableCell>{item.pioneer}</TableCell>
-                            <TableCell>{item.locacion}</TableCell>
-                            <TableCell>{item.cantidad}</TableCell>
-                          </TableRow>
-                        ))}
+                        {brand.items.map((item, index) => {
+                          const quantity = getItemQuantity(item.numeroParte);
+                          return (
+                            <TableRow key={index} className="hover:bg-muted/30">
+                              <TableCell className="font-medium">{item.numeroParte}</TableCell>
+                              <TableCell>{item.ano}</TableCell>
+                              <TableCell>{item.cilindros}</TableCell>
+                              <TableCell>{item.aplicacion}</TableCell>
+                              <TableCell>{item.usTool}</TableCell>
+                              <TableCell>{item.pioneer}</TableCell>
+                              <TableCell>{item.locacion}</TableCell>
+                              <TableCell>{item.cantidad}</TableCell>
+                              <TableCell>
+                                <div className="flex items-center justify-center gap-2">
+                                  {quantity === 0 ? (
+                                    <Button
+                                      size="sm"
+                                      variant="racing"
+                                      onClick={() => handleAddToCart(item, brand.marca)}
+                                    >
+                                      <ShoppingCart className="w-4 h-4 mr-1" />
+                                      Agregar
+                                    </Button>
+                                  ) : (
+                                    <div className="flex items-center gap-2 bg-muted rounded-md p-1">
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="h-8 w-8"
+                                        onClick={() => handleDecrement(item.numeroParte)}
+                                      >
+                                        <Minus className="w-4 h-4" />
+                                      </Button>
+                                      <span className="font-bold min-w-[2rem] text-center">{quantity}</span>
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="h-8 w-8"
+                                        onClick={() => handleIncrement(item.numeroParte)}
+                                      >
+                                        <Plus className="w-4 h-4" />
+                                      </Button>
+                                    </div>
+                                  )}
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                       </TableBody>
                     </Table>
                   </div>
