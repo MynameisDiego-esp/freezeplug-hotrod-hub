@@ -4,6 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
+<<<<<<< Updated upstream
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
@@ -20,3 +21,13 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
 }));
+=======
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      // This sets up the '@' alias to point to the 'src' directory.
+      "@": path.resolve(__dirname, "./src"),},},
+  base: "/freezeplug-hotrod-hub/",
+});
+>>>>>>> Stashed changes
