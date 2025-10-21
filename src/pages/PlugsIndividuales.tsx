@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { plugsData, IndividualPlug } from "@/data/plugsData";
 import { usePlugsFilter } from "@/hooks/usePlugsFilter";
 import { CategoryAccordion } from "@/components/individual-plugs/CategoryAccordion";
-import sellosImage from "@/assets/sellos1.jpg";
+import sellosImage from "@/assets/sellos13.jpeg";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,7 +75,7 @@ const PlugsIndividuales = () => {
                   <img 
                     src={sellosImage} 
                     alt="Tapones de congelación individuales de alta calidad" 
-                    className="w-full max-w-3xl mx-auto rounded-lg shadow-lg object-cover h-64"
+                    className="w-full max-w-3xl mx-auto rounded-lg shadow-lg object-cover h-74"
                   />
                 </div>
                 

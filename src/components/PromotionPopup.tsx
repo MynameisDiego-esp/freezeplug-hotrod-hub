@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import sellosImage from "@/assets/freeze-plugs-variety.jpg";
+import sellosImage from "@/assets/freeze-plugs-variety.jpeg";
 
 export const PromotionPopup = () => {
   const [open, setOpen] = useState(false);

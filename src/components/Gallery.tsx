@@ -1,9 +1,9 @@
 import muscleCar1 from "@/assets/muscle-car-1.jpg";
 import muscleCar2 from "@/assets/muscle-car-2.jpg";
 import engineDetail from "@/assets/engine-detail.jpg";
-import freezePlugsOrganized from "@/assets/freeze-plugs-organized.jpg";
-import freezePlugsInstallation from "@/assets/freeze-plugs-installation.jpg";
-import freezePlugsVariety from "@/assets/freeze-plugs-variety.jpg";
+import freezePlugsOrganized from "@/assets/galeria1.jpg";
+import freezePlugsInstallation from "@/assets/galeria2.jpg";
+import freezePlugsVariety from "@/assets/freeze-plugs-variety.jpeg";
 
 const Gallery = () => {
   const images = [

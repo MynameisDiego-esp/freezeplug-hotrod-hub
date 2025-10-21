@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import heroEngine from "@/assets/hero-engine.jpg";
 import engineblock from "@/assets/engine-2.jpg";
-import freezePlugsHero from "@/assets/freeze-plugs-hero.jpg";
-import freezePlugsCollection from "@/assets/freeze-plugs-collection.jpg";
-
+import freezePlugsHero from "@/assets/inicio1.jpg";
+import freezePlugsCollection from "@/assets/inicio2.jpg";
+import heroEngine from "@/assets/hero-engine.jpg";
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const backgroundImages = [
+    heroEngine,
     freezePlugsHero,
     freezePlugsCollection,
-    heroEngine,
     engineblock,
   ];
 
