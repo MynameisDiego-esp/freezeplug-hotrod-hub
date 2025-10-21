@@ -18,11 +18,18 @@ const PlugsIndividuales = () => {
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
   const handleAddToCart = (plug: IndividualPlug) => {
+    const details = [
+      plug.tipo,
+      plug.Diametro_recomendado_del_cilindro && plug.Diametro_recomendado_del_cilindro > 0 
+        ? `Ø ${plug.Diametro_recomendado_del_cilindro}"` 
+        : null
+    ].filter(Boolean).join(" | ");
+    
     addItem({
       id: plug.NumeroParte,
       name: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`,
       type: 'individual',
-      details: `${plug.tipo ?? ""} | ${plug.material ?? ""} | ${plug.aplicacion ?? ""}`
+      details: details || plug.Tamaño_de_Sello
     });
     toast.success("Agregado al carrito", {
       description: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`

@@ -25,7 +25,7 @@ export const PlugCard = ({
     <Card className="border-2 hover:border-accent/50 transition-colors">
       <CardContent className="p-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex-1 grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div className="flex-1 flex flex-wrap gap-x-6 gap-y-3 text-sm">
             <div>
               <p className="text-muted-foreground text-xs">Número de Parte</p>
               <p className="font-bold text-primary">{plug.NumeroParte}</p>
@@ -34,18 +34,18 @@ export const PlugCard = ({
               <p className="text-muted-foreground text-xs">Diámetro</p>
               <p className="font-semibold">{plug.Tamaño_de_Sello}</p>
             </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Tipo</p>
-              <p className="font-semibold">{plug.tipo ?? "-"}</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Material</p>
-              <p className="font-semibold">{plug.material ?? "-"}</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Aplicación</p>
-              <p className="font-semibold">{plug.aplicacion ?? "-"}</p>
-            </div>
+            {plug.tipo && (
+              <div>
+                <p className="text-muted-foreground text-xs">Tipo</p>
+                <p className="font-semibold">{plug.tipo}</p>
+              </div>
+            )}
+            {plug.Diametro_recomendado_del_cilindro && plug.Diametro_recomendado_del_cilindro > 0 && (
+              <div>
+                <p className="text-muted-foreground text-xs">Diámetro Recomendado</p>
+                <p className="font-semibold">{plug.Diametro_recomendado_del_cilindro}"</p>
+              </div>
+            )}
           </div>
           
           <div className="flex items-center gap-3 md:w-64">
