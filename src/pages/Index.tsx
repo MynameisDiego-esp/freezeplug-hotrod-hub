@@ -8,6 +8,7 @@ import OrderForm from "@/components/OrderForm";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { PromotionPopup } from "@/components/PromotionPopup";
 
 const Index = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const Index = () => {
       </main>
       <Footer />
       <WhatsAppButton />
+      <PromotionPopup />
     </div>
   );
 };
