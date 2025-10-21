@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { plugsData, IndividualPlug } from "@/data/plugsData";
 import { usePlugsFilter } from "@/hooks/usePlugsFilter";
 import { CategoryAccordion } from "@/components/individual-plugs/CategoryAccordion";
+import sellosImage from "@/assets/sellos1.jpg";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -69,6 +70,14 @@ const PlugsIndividuales = () => {
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                   Selección completa de freeze plugs individuales para todas tus necesidades de reparación.
                 </p>
+                
+                <div className="mb-8">
+                  <img 
+                    src={sellosImage} 
+                    alt="Tapones de congelación individuales de alta calidad" 
+                    className="w-full max-w-3xl mx-auto rounded-lg shadow-lg object-cover h-64"
+                  />
+                </div>
                 
                 <div className="bg-accent/20 border-2 border-accent rounded-lg p-4 max-w-2xl mx-auto mb-8">
                   <p className="font-bold text-lg">
