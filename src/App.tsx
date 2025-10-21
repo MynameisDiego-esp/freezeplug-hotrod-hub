@@ -18,7 +18,7 @@ const App = () => (
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter basename="/freezeplug-hotrod-hub">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalogo-sets" element={<CatalogoSets />} />
