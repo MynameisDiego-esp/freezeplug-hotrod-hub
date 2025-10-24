@@ -1,3 +1,5 @@
+// src/App.tsx
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,13 +14,18 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// **CRÍTICO:** Define el basename usando la variable de entorno de Vite
+// Esto será "/" en desarrollo y "/freezeplug-hotrod-hub/" en producción
+const BASE_NAME = import.meta.env.BASE_URL;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        {/* Usa la variable BASE_NAME: En local es '/', en Pages es '/repo-name/' */}
+        <BrowserRouter basename={BASE_NAME}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalogo-sets" element={<CatalogoSets />} />
