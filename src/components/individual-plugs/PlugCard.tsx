@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, Plus, Minus } from "lucide-react";
 import { IndividualPlug } from "@/data/plugsData";
+import { translatePlugType } from "@/lib/utils";
 
 interface PlugCardProps {
   plug: IndividualPlug;
@@ -28,7 +29,7 @@ export const PlugCard = ({
           <div className="flex-1 flex flex-wrap gap-x-6 gap-y-3 text-sm">
             <div>
               <p className="text-muted-foreground text-xs">Número de Parte</p>
-              <p className="font-bold text-primary">{plug.NumeroParte}</p>
+              <p className="font-bold text-golden-yellow">{plug.NumeroParte}</p>
             </div>
             <div>
               <p className="text-muted-foreground text-xs">Diámetro</p>
@@ -37,7 +38,7 @@ export const PlugCard = ({
             {plug.tipo && (
               <div>
                 <p className="text-muted-foreground text-xs">Tipo</p>
-                <p className="font-semibold">{plug.tipo}</p>
+                <p className="font-semibold">{translatePlugType(plug.tipo)}</p>
               </div>
             )}
             {plug.Diametro_recomendado_del_cilindro && plug.Diametro_recomendado_del_cilindro > 0 && (
