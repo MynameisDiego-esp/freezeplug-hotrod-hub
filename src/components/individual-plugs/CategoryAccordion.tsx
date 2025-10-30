@@ -27,7 +27,7 @@ export const CategoryAccordion = ({
     >
       <AccordionTrigger className="px-6 py-4 hover:bg-muted/50">
         <div className="flex-1 text-left pr-4">
-          <h3 className="text-xl font-bold text-golden-yellow mb-1 drop-shadow-md">
+          <h3 className="text-xl font-bold text-dark-yellow mb-1 drop-shadow-md">
             {translateCategory(category.categoria)}
           </h3>
           <p className="text-sm text-muted-foreground font-normal">

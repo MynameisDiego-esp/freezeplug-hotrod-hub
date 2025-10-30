@@ -57,6 +57,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "racing-yellow": "hsl(var(--racing-yellow))",
+        "golden-yellow": "hsl(var(--golden-yellow))",
+        "dark-yellow": "hsl(var(--dark-yellow))",
+        "racing-red": "hsl(var(--racing-red))",
+        "dark-red": "hsl(var(--dark-red))",
+        "racing-black": "hsl(var(--racing-black))",
       },
       borderRadius: {
         lg: "var(--radius)",
