@@ -1,6 +1,7 @@
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PlugCategory, IndividualPlug } from "@/data/plugsData";
 import { PlugCard } from "./PlugCard";
+import { translateCategory } from "@/lib/utils";
 
 interface CategoryAccordionProps {
   category: PlugCategory;
@@ -26,8 +27,8 @@ export const CategoryAccordion = ({
     >
       <AccordionTrigger className="px-6 py-4 hover:bg-muted/50">
         <div className="flex-1 text-left pr-4">
-          <h3 className="text-xl font-bold text-primary mb-1">
-            {category.categoria}
+          <h3 className="text-xl font-bold text-golden-yellow mb-1 drop-shadow-md">
+            {translateCategory(category.categoria)}
           </h3>
           <p className="text-sm text-muted-foreground font-normal">
             {category.descripcion}
