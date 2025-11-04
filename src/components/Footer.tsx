@@ -9,7 +9,8 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-black text-primary mb-4">TAPONES MONOBLOQUE</h3>
             <p className="text-background/80 mb-4">
-              Tapones de congelación monobloque premium para muscle cars y motores de alto rendimiento. Calidad diseñada para confiabilidad.
+              Tapones de congelación monobloque premium para muscle cars y motores de alto rendimiento. Calidad diseñada
+              para confiabilidad.
             </p>
           </div>
 
@@ -18,24 +19,24 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4 text-primary">Enlaces Rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <button 
-                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                <button
+                  onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
                   Productos
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
+                <button
+                  onClick={() => document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
                   Realizar Pedido
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                <button
+                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   className="text-background/80 hover:text-primary transition-colors"
                 >
                   Contáctanos
@@ -54,12 +55,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-background/80">
                 <Phone className="w-5 h-5 text-primary" />
-                <span>(619) 454-0801</span>
+                <span>(+++) ****-****</span>
               </li>
               <li className="flex items-center gap-2 text-background/80">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span>Productos especiales S.A DE C.V, 1RO DE MAYO NO 1444, COLONIA LAS TORRES #22560
-</span>
+                <span> *********</span>
               </li>
             </ul>
           </div>
