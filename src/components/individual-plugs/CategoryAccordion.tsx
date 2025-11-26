@@ -11,6 +11,7 @@ interface CategoryAccordionProps {
   onIncrement: (id: string) => void;
   onDecrement: (id: string) => void;
   onQuantityChange: (id: string, value: string) => void;
+  onRemove: (id: string) => void;
 }
 
 export const CategoryAccordion = ({
@@ -20,7 +21,8 @@ export const CategoryAccordion = ({
   onAddToCart,
   onIncrement,
   onDecrement,
-  onQuantityChange
+  onQuantityChange,
+  onRemove
 }: CategoryAccordionProps) => {
   return (
     <AccordionItem 
@@ -55,6 +57,7 @@ export const CategoryAccordion = ({
               onIncrement={() => onIncrement(id)}
               onDecrement={() => onDecrement(id)}
               onQuantityChange={(value) => onQuantityChange(id, value)}
+              onRemove={() => onRemove(id)}
             />
           );
         })}

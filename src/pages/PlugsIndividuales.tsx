@@ -14,7 +14,7 @@ import sellosImage from "@/assets/sellos13.jpeg";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { addItem, getItemQuantity, updateQuantity, items } = useCart();
+  const { addItem, getItemQuantity, updateQuantity, items, removeItem } = useCart();
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
@@ -54,6 +54,12 @@ const PlugsIndividuales = () => {
     } else if (numValue >= 0) {
       updateQuantity(id, numValue);
     }
+    // Si es negativo, no hacemos nada (ignoramos el valor)
+  };
+
+  const handleRemoveFromCart = (id: string) => {
+    removeItem(id);
+    toast.info("Eliminado del carrito");
   };
 
   return (
@@ -113,6 +119,7 @@ const PlugsIndividuales = () => {
                     onIncrement={handleIncrement}
                     onDecrement={handleDecrement}
                     onQuantityChange={handleQuantityChange}
+                    onRemove={handleRemoveFromCart}
                   />
                 ))}
               </Accordion>
