@@ -26,7 +26,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img src={logoProkar} alt="PROKAR Logo" className="h-12 w-auto" />
+              <img src={logoProkar} alt="PROKAR Logo" className="h-20 w-auto" />
             </Link>
           </div>
 
