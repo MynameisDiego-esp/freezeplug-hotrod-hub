@@ -5,6 +5,7 @@ import engineblock from "@/assets/engine-2.jpg";
 import freezePlugsHero from "@/assets/inicio1.jpg";
 import freezePlugsCollection from "@/assets/inicio2.jpg";
 import heroEngine from "@/assets/hero-engine.jpg";
+import prokarLogo from "@/assets/LOGO_PROKARR.png";
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const backgroundImages = [heroEngine, freezePlugsHero, freezePlugsCollection, engineblock];
@@ -69,6 +70,10 @@ const Hero = () => {
       {/* Contenido principal */}
       <div className="relative z-20 container mx-auto px-4 py-20 text-center md:text-left">
         <div className="max-w-3xl bg-black backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl">
+          <div className="flex justify-center mb-8 animate-fade-in">
+            <img src={prokarLogo} alt="PROKAR Logo" className="h-32 md:h-40 w-auto" />
+          </div>
+          
           <div className="inline-block mb-6 animate-fade-in">
             <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
               Ingeniería Premium
