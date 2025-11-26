@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logoProkar from "@/assets/logo-prokar.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -24,8 +25,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-black text-primary">
-              PROKAR
+            <Link to="/" className="flex items-center">
+              <img src={logoProkar} alt="PROKAR Logo" className="h-12 w-auto" />
             </Link>
           </div>
 
