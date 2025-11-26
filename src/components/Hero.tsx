@@ -75,12 +75,12 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black mb-6 text-foreground animate-fade-in-up">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 text-white animate-fade-in-up">
             Sellos para <span className="text-primary">Monoblock</span>
           </h1>
 
           <p
-            className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl animate-fade-in-up"
+            className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl animate-fade-in-up"
             style={{
               animationDelay: "0.2s",
             }}
