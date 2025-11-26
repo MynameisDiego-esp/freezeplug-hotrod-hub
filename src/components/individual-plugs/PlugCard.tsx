@@ -8,6 +8,7 @@ import { translatePlugType } from "@/lib/utils";
 interface PlugCardProps {
   plug: IndividualPlug;
   quantity: number;
+  items: any[];
   onAddToCart: () => void;
   onIncrement: () => void;
   onDecrement: () => void;
@@ -17,6 +18,7 @@ interface PlugCardProps {
 export const PlugCard = ({
   plug,
   quantity,
+  items,
   onAddToCart,
   onIncrement,
   onDecrement,
@@ -50,7 +52,7 @@ export const PlugCard = ({
           </div>
           
           <div className="flex items-center gap-3 md:w-64">
-            {quantity === 0 ? (
+            {!items.some(item => item.id === plug.NumeroParte) ? (
               <Button
                 variant="racing"
                 className="w-full"

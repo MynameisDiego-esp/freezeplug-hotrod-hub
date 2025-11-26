@@ -5,6 +5,7 @@ import { translateCategory } from "@/lib/utils";
 
 interface CategoryAccordionProps {
   category: PlugCategory;
+  items: any[];
   getItemQuantity: (id: string) => number;
   onAddToCart: (plug: IndividualPlug) => void;
   onIncrement: (id: string) => void;
@@ -14,6 +15,7 @@ interface CategoryAccordionProps {
 
 export const CategoryAccordion = ({
   category,
+  items,
   getItemQuantity,
   onAddToCart,
   onIncrement,
@@ -48,6 +50,7 @@ export const CategoryAccordion = ({
               key={plugIndex}
               plug={plug}
               quantity={quantity}
+              items={items}
               onAddToCart={() => onAddToCart(plug)}
               onIncrement={() => onIncrement(id)}
               onDecrement={() => onDecrement(id)}

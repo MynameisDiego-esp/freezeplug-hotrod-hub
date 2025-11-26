@@ -14,7 +14,7 @@ import sellosImage from "@/assets/sellos13.jpeg";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { addItem, getItemQuantity, updateQuantity } = useCart();
+  const { addItem, getItemQuantity, updateQuantity, items } = useCart();
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
@@ -48,8 +48,10 @@ const PlugsIndividuales = () => {
   };
 
   const handleQuantityChange = (id: string, value: string) => {
-    const numValue = parseInt(value) || 0;
-    if (numValue >= 0) {
+    const numValue = parseInt(value);
+    if (value === '' || isNaN(numValue)) {
+      updateQuantity(id, 0);
+    } else if (numValue >= 0) {
       updateQuantity(id, numValue);
     }
   };
@@ -105,6 +107,7 @@ const PlugsIndividuales = () => {
                   <CategoryAccordion
                     key={categoryIndex}
                     category={category}
+                    items={items}
                     getItemQuantity={getItemQuantity}
                     onAddToCart={handleAddToCart}
                     onIncrement={handleIncrement}
