@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Plus, Minus } from "lucide-react";
+import { Send, Plus, Minus, X } from "lucide-react";
 import { IndividualPlug } from "@/data/plugsData";
 import { translatePlugType } from "@/lib/utils";
 
@@ -13,6 +13,7 @@ interface PlugCardProps {
   onIncrement: () => void;
   onDecrement: () => void;
   onQuantityChange: (value: string) => void;
+  onRemove: () => void;
 }
 
 export const PlugCard = ({
@@ -22,7 +23,8 @@ export const PlugCard = ({
   onAddToCart,
   onIncrement,
   onDecrement,
-  onQuantityChange
+  onQuantityChange,
+  onRemove
 }: PlugCardProps) => {
   return (
     <Card className="border-2 hover:border-accent/50 transition-colors">
@@ -66,17 +68,39 @@ export const PlugCard = ({
               </Button>
             ) : (
               <div 
-                className="flex flex-col gap-2 w-full"
+                className="flex flex-col gap-2 w-full relative"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Input
-                  type="number"
-                  min="0"
-                  value={quantity}
-                  onChange={(e) => onQuantityChange(e.target.value)}
-                  placeholder="Ingrese cantidad"
-                  className="w-full text-center font-bold h-10"
-                />
+                <div className="relative">
+                  <Input
+                    type="number"
+                    min="0"
+                    value={quantity}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // Prevenir números negativos
+                      if (value === '' || parseInt(value) >= 0) {
+                        onQuantityChange(value);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      // Prevenir el signo menos y la letra 'e'
+                      if (e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '+') {
+                        e.preventDefault();
+                      }
+                    }}
+                    placeholder="Ingrese cantidad"
+                    className="w-full text-center font-bold h-10 pr-8"
+                  />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="absolute right-0 top-0 h-10 w-10 text-destructive hover:text-destructive hover:bg-destructive/10"
+                    onClick={onRemove}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
                 <div className="flex items-center gap-2 justify-center">
                   <Button
                     size="sm"
