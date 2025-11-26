@@ -5,6 +5,7 @@ import engineblock from "@/assets/engine-2.jpg";
 import freezePlugsHero from "@/assets/inicio1.jpg";
 import freezePlugsCollection from "@/assets/inicio2.jpg";
 import heroEngine from "@/assets/hero-engine.jpg";
+import componentHero from "@/assets/component-hero.png";
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const backgroundImages = [heroEngine, freezePlugsHero, freezePlugsCollection, engineblock];
@@ -67,48 +68,62 @@ const Hero = () => {
       </button>
 
       {/* Contenido principal */}
-      <div className="relative z-20 container mx-auto px-4 py-20 text-center md:text-left">
-        <div className="max-w-3xl bg-black backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl">
-          <div className="inline-block mb-6 animate-fade-in">
-            <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
-              Ingeniería Premium
-            </span>
-          </div>
+      <div className="relative z-20 container mx-auto px-4 py-20">
+        <div className="max-w-6xl mx-auto bg-black backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
+          <div className="grid md:grid-cols-2 min-h-[600px]">
+            {/* Columna izquierda - Texto */}
+            <div className="flex flex-col justify-center p-8 md:p-12 text-center md:text-left">
+              <div className="inline-block mb-6 animate-fade-in">
+                <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
+                  Ingeniería Premium
+                </span>
+              </div>
 
-          <h1 className="text-5xl md:text-7xl font-black mb-6 text-white animate-fade-in-up">
-            Sellos para <span className="text-primary">Monoblock</span>
-          </h1>
+              <h1 className="text-5xl md:text-7xl font-black mb-6 text-white animate-fade-in-up">
+                Sellos para <span className="text-primary">Monoblock</span>
+              </h1>
 
-          <p
-            className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl animate-fade-in-up"
-            style={{
-              animationDelay: "0.2s",
-            }}
-          >
-            ESPECIALISTAS EN SELLOS PARA MOTOR CON CALIDAD INTERNACIONAL DESDE 1967
-          </p>
+              <p
+                className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-up"
+                style={{
+                  animationDelay: "0.2s",
+                }}
+              >
+                ESPECIALISTAS EN SELLOS PARA MOTOR CON CALIDAD INTERNACIONAL DESDE 1967
+              </p>
 
-          <div
-            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up"
-            style={{
-              animationDelay: "0.4s",
-            }}
-          >
-            <Button variant="racing" size="xl" onClick={scrollToProducts} className="group">
-              Ver Productos
-              <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
-            </Button>
-            <Button
-              variant="outline"
-              size="xl"
-              onClick={() =>
-                document.getElementById("order-form")?.scrollIntoView({
-                  behavior: "smooth",
-                })
-              }
-            >
-              Solicitar Cotización
-            </Button>
+              <div
+                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up"
+                style={{
+                  animationDelay: "0.4s",
+                }}
+              >
+                <Button variant="racing" size="xl" onClick={scrollToProducts} className="group">
+                  Ver Productos
+                  <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="xl"
+                  onClick={() =>
+                    document.getElementById("order-form")?.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
+                >
+                  Solicitar Cotización
+                </Button>
+              </div>
+            </div>
+
+            {/* Columna derecha - Imagen */}
+            <div className="relative h-full min-h-[400px] md:min-h-[600px]">
+              <img 
+                src={componentHero} 
+                alt="Componente esencial para motores reconstruidos" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
