@@ -121,7 +121,7 @@ const Hero = () => {
               <img 
                 src={componentHero} 
                 alt="Componente esencial para motores reconstruidos" 
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover border-l-2 border-primary/30 shadow-[0_0_30px_rgba(234,179,8,0.2)]"
               />
             </div>
           </div>
