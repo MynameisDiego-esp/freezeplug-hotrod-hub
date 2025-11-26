@@ -50,7 +50,7 @@ const Hero = () => {
 
       {/* Contenido principal */}
       <div className="relative z-20 container mx-auto px-4 py-20 text-center md:text-left">
-        <div className="max-w-3xl bg-background/80 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl">
+        <div className="max-w-3xl bg-background/95 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl">
           <div className="inline-block mb-6 animate-fade-in">
             <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
               Ingeniería Premium
