@@ -74,7 +74,7 @@ const Hero = () => {
               Ver Productos
               <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="xl" onClick={() => document.getElementById("contact")?.scrollIntoView({
+            <Button variant="outline" size="xl" onClick={() => document.getElementById("order-form")?.scrollIntoView({
             behavior: "smooth"
           })}>
               Solicitar Cotización
