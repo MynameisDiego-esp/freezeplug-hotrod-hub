@@ -37,35 +37,33 @@ const Hero = () => {
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center"
-      }}>
-            <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
-          </div>)}
+      }} />)}
       </div>
 
       {/* Botones de navegación manual */}
-      <button onClick={prevImage} className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-30 bg-foreground/40 hover:bg-foreground/60 text-background p-2 rounded-full transition" aria-label="Imagen anterior">
+      <button onClick={prevImage} className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-30 bg-background/70 hover:bg-background/90 text-foreground p-2 rounded-full transition backdrop-blur-sm" aria-label="Imagen anterior">
         <ChevronLeft className="w-6 h-6" />
       </button>
-      <button onClick={nextImage} className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-30 bg-foreground/40 hover:bg-foreground/60 text-background p-2 rounded-full transition" aria-label="Siguiente imagen">
+      <button onClick={nextImage} className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-30 bg-background/70 hover:bg-background/90 text-foreground p-2 rounded-full transition backdrop-blur-sm" aria-label="Siguiente imagen">
         <ChevronRight className="w-6 h-6" />
       </button>
 
       {/* Contenido principal */}
       <div className="relative z-20 container mx-auto px-4 py-20 text-center md:text-left">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl bg-background/80 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-2xl">
           <div className="inline-block mb-6 animate-fade-in">
-            <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-foreground/50 backdrop-blur-sm rounded-full">
+            <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
               Ingeniería Premium
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black mb-6 text-background animate-fade-in-up">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 text-foreground animate-fade-in-up">
             Sellos para {" "}
             <span className="text-primary">Monoblock
           </span>
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-background/90 max-w-2xl animate-fade-in-up" style={{
+          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl animate-fade-in-up" style={{
           animationDelay: "0.2s"
         }}>ESPECIALISTAS EN SELLOS PARA MOTOR CON CALIDAD INTERNACIONAL DESDE 1967</p>
 
@@ -78,7 +76,7 @@ const Hero = () => {
             </Button>
             <Button variant="outline" size="xl" onClick={() => document.getElementById("contact")?.scrollIntoView({
             behavior: "smooth"
-          })} className="bg-background/10 backdrop-blur-sm border-background/30 text-background hover:bg-background hover:text-foreground">
+          })}>
               Solicitar Cotización
             </Button>
           </div>
@@ -91,7 +89,7 @@ const Hero = () => {
       </div>
 
       {/* Indicador de scroll */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30 bg-background/70 backdrop-blur-sm rounded-full p-3">
         <ArrowDown className="w-6 h-6 text-primary" />
       </div>
 
