@@ -70,21 +70,21 @@ const Hero = () => {
       {/* Contenido principal */}
       <div className="relative z-20 container mx-auto px-4 py-20">
         <div className="max-w-6xl mx-auto bg-black backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
-          <div className="grid md:grid-cols-3 min-h-[600px]">
+          <div className="grid md:grid-cols-3 min-h-[500px]">
             {/* Columna izquierda - Texto */}
-            <div className="md:col-span-2 flex flex-col justify-center p-8 md:p-12 text-center md:text-left">
-              <div className="inline-block mb-6 animate-fade-in">
-                <span className="text-primary text-sm font-bold uppercase tracking-widest px-4 py-2 bg-primary/10 border-2 border-primary rounded-full">
+            <div className="md:col-span-2 flex flex-col justify-center p-6 md:p-8 text-center md:text-left">
+              <div className="inline-block mb-4 animate-fade-in">
+                <span className="text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 bg-primary/10 border-2 border-primary rounded-full">
                   Ingeniería Premium
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-black mb-6 text-white animate-fade-in-up">
+              <h1 className="text-3xl md:text-5xl font-black mb-4 text-white animate-fade-in-up">
                 Sellos para <span className="text-primary">Monoblock</span>
               </h1>
 
               <p
-                className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-up"
+                className="text-base md:text-lg mb-6 text-gray-200 animate-fade-in-up"
                 style={{
                   animationDelay: "0.2s",
                 }}
@@ -93,18 +93,18 @@ const Hero = () => {
               </p>
 
               <div
-                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up"
+                className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start animate-fade-in-up"
                 style={{
                   animationDelay: "0.4s",
                 }}
               >
-                <Button variant="racing" size="xl" onClick={scrollToProducts} className="group">
+                <Button variant="racing" size="lg" onClick={scrollToProducts} className="group">
                   Ver Productos
                   <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
                 </Button>
                 <Button
                   variant="outline"
-                  size="xl"
+                  size="lg"
                   onClick={() =>
                     document.getElementById("order-form")?.scrollIntoView({
                       behavior: "smooth",
@@ -117,7 +117,7 @@ const Hero = () => {
             </div>
 
             {/* Columna derecha - Imagen */}
-            <div className="relative h-full min-h-[400px] md:min-h-[600px]">
+            <div className="relative h-full min-h-[300px] md:min-h-[500px]">
               <img 
                 src={componentHero} 
                 alt="Componente esencial para motores reconstruidos" 
