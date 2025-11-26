@@ -60,7 +60,7 @@ const Hero = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black mb-6 text-background animate-fade-in-up">
-            Sellos de {" "}
+            Sellos para {" "}
             <span className="text-primary">Monoblock
           </span>
           </h1>
