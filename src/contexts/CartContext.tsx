@@ -32,7 +32,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, { ...item, quantity: 0 }];
     });
   };
 
@@ -41,7 +41,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateQuantity = (id: string, quantity: number) => {
-    if (quantity <= 0) {
+    if (quantity < 0) {
       removeItem(id);
       return;
     }
