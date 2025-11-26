@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { Send } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
@@ -28,9 +28,9 @@ const FloatingCart = () => {
         onClick={handleClick}
         className="rounded-full shadow-2xl h-16 w-16 relative group hover:w-auto transition-all duration-300"
       >
-        <ShoppingCart className="w-6 h-6 group-hover:mr-2" />
+        <Send className="w-6 h-6 group-hover:mr-2" />
         <span className="hidden group-hover:inline-block whitespace-nowrap">
-          Ver Carrito
+          Información
         </span>
         {totalItems > 0 && (
           <Badge 
