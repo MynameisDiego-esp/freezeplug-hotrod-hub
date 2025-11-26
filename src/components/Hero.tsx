@@ -67,11 +67,7 @@ const Hero = () => {
 
           <p className="text-xl md:text-2xl mb-8 text-background/90 max-w-2xl animate-fade-in-up" style={{
           animationDelay: "0.2s"
-        }}>
-            Componentes de motor de alto rendimiento construidos para
-            entusiastas de muscle cars y mecánicos profesionales. Calidad en la
-            que puedes confiar, potencia que puedes sentir.
-          </p>
+        }}>ESPECIALISTAS EN SELLOS PARA MOTOR CON CALIDAD INTERNACIONAL DESDE 1967</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-in-up" style={{
           animationDelay: "0.4s"
