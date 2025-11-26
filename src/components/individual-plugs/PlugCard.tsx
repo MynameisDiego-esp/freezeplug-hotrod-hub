@@ -64,32 +64,33 @@ export const PlugCard = ({
               </Button>
             ) : (
               <div 
-                className="flex items-center gap-2 bg-muted rounded-md p-2 w-full"
+                className="flex flex-col gap-2 w-full"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-8 w-8"
-                  onClick={onDecrement}
-                >
-                  <Minus className="w-4 h-4" />
-                </Button>
                 <Input
                   type="number"
                   min="0"
                   value={quantity}
                   onChange={(e) => onQuantityChange(e.target.value)}
-                  className="w-16 text-center font-bold h-8 px-1"
+                  placeholder="Ingrese cantidad"
+                  className="w-full text-center font-bold h-10"
                 />
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-8 w-8"
-                  onClick={onIncrement}
-                >
-                  <Plus className="w-4 h-4" />
-                </Button>
+                <div className="flex items-center gap-2 justify-center">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={onDecrement}
+                  >
+                    <Minus className="w-3 h-3" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={onIncrement}
+                  >
+                    <Plus className="w-3 h-3" />
+                  </Button>
+                </div>
               </div>
             )}
           </div>
