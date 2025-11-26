@@ -104,9 +104,9 @@ const Header = () => {
             <Button 
               variant="racing" 
               size="sm"
-              onClick={() => isHome ? scrollToSection('order-form') : window.location.href = '/#order-form'}
+              onClick={() => isHome ? scrollToSection('contact') : window.location.href = '/#contact'}
             >
-              Cotizar
+              CONTACTO
             </Button>
           </nav>
 
@@ -200,9 +200,9 @@ const Header = () => {
               variant="racing" 
               size="sm"
               className="w-full"
-              onClick={() => isHome ? scrollToSection('order-form') : window.location.href = '/#order-form'}
+              onClick={() => isHome ? scrollToSection('contact') : window.location.href = '/#contact'}
             >
-              Cotizar
+              CONTACTO
             </Button>
           </div>
         )}
