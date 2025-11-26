@@ -44,9 +44,7 @@ const PlugsIndividuales = () => {
 
   const handleDecrement = (id: string) => {
     const currentQty = getItemQuantity(id);
-    if (currentQty > 0) {
-      updateQuantity(id, currentQty - 1);
-    }
+    updateQuantity(id, currentQty - 1);
   };
 
   const handleQuantityChange = (id: string, value: string) => {
