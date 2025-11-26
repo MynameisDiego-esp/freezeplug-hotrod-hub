@@ -81,7 +81,7 @@ const PlugsIndividuales = () => {
                 
                 <div className="bg-accent/20 border-2 border-accent rounded-lg p-4 max-w-2xl mx-auto mb-8">
                   <p className="font-bold text-lg">
-                    ⚠️ Pedido Mínimo: 50 piezas por orden
+                    ⚠️ Pedido Mínimo: 500 piezas por orden
                   </p>
                   <p className="text-sm text-muted-foreground mt-2">
                     Para pedidos menores, consulte disponibilidad

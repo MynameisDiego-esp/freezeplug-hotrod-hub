@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ShoppingCart, Plus, Minus } from "lucide-react";
+import { Send, Plus, Minus } from "lucide-react";
 import { IndividualPlug } from "@/data/plugsData";
 import { translatePlugType } from "@/lib/utils";
 
@@ -59,8 +59,8 @@ export const PlugCard = ({
                   onAddToCart();
                 }}
               >
-                <ShoppingCart className="w-4 h-4 mr-2" />
-                Agregar
+                <Send className="w-4 h-4 mr-2" />
+                Información
               </Button>
             ) : (
               <div 

@@ -100,7 +100,7 @@ Detalles: ${formData.notes}`;
         <div className="max-w-2xl mx-auto">
           <div className="bg-accent/20 border-2 border-accent rounded-lg p-4 mb-8">
             <p className="font-bold text-center text-lg">
-              ⚠️ Pedido Mínimo: 50 piezas por orden
+              ⚠️ Pedido Mínimo: 500 piezas por orden
             </p>
             <p className="text-sm text-muted-foreground text-center mt-2">
               Para pedidos menores, consulte disponibilidad
@@ -237,15 +237,15 @@ Detalles: ${formData.notes}`;
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="quote-quantity">Cantidad (mín. 50 piezas) *</Label>
+                      <Label htmlFor="quote-quantity">Cantidad (mín. 500 piezas) *</Label>
                       <Input
                         id="quote-quantity"
                         type="number"
-                        min="50"
+                        min="500"
                         required
                         value={formData.quantity}
                         onChange={(e) => setFormData({...formData, quantity: e.target.value})}
-                        placeholder="Ej: 100"
+                        placeholder="Ej: 500"
                       />
                     </div>
 
