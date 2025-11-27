@@ -7,7 +7,7 @@ interface CategoryAccordionProps {
   category: PlugCategory;
   items: any[];
   getItemQuantity: (id: string) => number;
-  onAddToCart: (plug: IndividualPlug, category: string) => void;
+  onAddToCart: (plug: IndividualPlug, category: string, groupNumber: number) => void;
   onIncrement: (id: string) => void;
   onDecrement: (id: string) => void;
   onQuantityChange: (id: string, value: string) => void;
@@ -50,35 +50,40 @@ export const CategoryAccordion = ({
           }
           acc[groupIndex].push({ plug, plugIndex });
           return acc;
-        }, [] as { plug: IndividualPlug; plugIndex: number }[][]).map((group, groupIndex) => (
-          <div key={groupIndex} className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-primary/30 to-transparent rounded-full" />
-              <span className="text-xs font-bold text-primary/70 px-2">
-                Grupo {groupIndex + 1}
-              </span>
-              <div className="h-[2px] flex-1 bg-gradient-to-l from-primary/30 to-transparent rounded-full" />
+        }, [] as { plug: IndividualPlug; plugIndex: number }[][]).map((group, groupIndex) => {
+          const groupNumber = groupIndex + 1;
+          const isOddGroup = groupNumber % 2 === 1;
+          
+          return (
+            <div key={groupIndex} className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className={`h-[2px] flex-1 bg-gradient-to-r rounded-full ${isOddGroup ? 'from-yellow-500/50' : 'from-primary/30'} to-transparent`} />
+                <span className={`text-xs font-bold px-2 ${isOddGroup ? 'text-yellow-600' : 'text-primary/70'}`}>
+                  Grupo {groupNumber} {isOddGroup ? '⚡' : ''}
+                </span>
+                <div className={`h-[2px] flex-1 bg-gradient-to-l rounded-full ${isOddGroup ? 'from-yellow-500/50' : 'from-primary/30'} to-transparent`} />
+              </div>
+              {group.map(({ plug, plugIndex }) => {
+                const id = plug.NumeroParte;
+                const quantity = getItemQuantity(id);
+                
+                return (
+                  <PlugCard
+                    key={plugIndex}
+                    plug={plug}
+                    quantity={quantity}
+                    items={items}
+                    onAddToCart={() => onAddToCart(plug, category.categoria, groupNumber)}
+                    onIncrement={() => onIncrement(id)}
+                    onDecrement={() => onDecrement(id)}
+                    onQuantityChange={(value) => onQuantityChange(id, value)}
+                    onRemove={() => onRemove(id)}
+                  />
+                );
+              })}
             </div>
-            {group.map(({ plug, plugIndex }) => {
-              const id = plug.NumeroParte;
-              const quantity = getItemQuantity(id);
-              
-              return (
-                <PlugCard
-                  key={plugIndex}
-                  plug={plug}
-                  quantity={quantity}
-                  items={items}
-                  onAddToCart={() => onAddToCart(plug, category.categoria)}
-                  onIncrement={() => onIncrement(id)}
-                  onDecrement={() => onDecrement(id)}
-                  onQuantityChange={(value) => onQuantityChange(id, value)}
-                  onRemove={() => onRemove(id)}
-                />
-              );
-            })}
-          </div>
-        ))}
+          );
+        })}
       </AccordionContent>
     </AccordionItem>
   );

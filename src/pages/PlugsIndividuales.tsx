@@ -22,7 +22,7 @@ const PlugsIndividuales = () => {
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
-  const handleAddToCart = (plug: IndividualPlug, category: string) => {
+  const handleAddToCart = (plug: IndividualPlug, category: string, groupNumber: number) => {
     const details = [
       plug.tipo,
       plug.Diametro_recomendado_del_cilindro && plug.Diametro_recomendado_del_cilindro > 0 
@@ -35,7 +35,8 @@ const PlugsIndividuales = () => {
       name: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`,
       type: 'individual',
       details: details || plug.Tamaño_de_Sello,
-      category: category
+      category: category,
+      groupNumber: groupNumber
     });
     toast.success("Agregado al carrito", {
       description: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`

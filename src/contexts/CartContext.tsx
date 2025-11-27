@@ -7,6 +7,7 @@ export interface CartItem {
   type: 'set' | 'product' | 'individual';
   details?: string;
   category?: string;
+  groupNumber?: number;
 }
 
 interface CartContextType {
@@ -77,7 +78,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const getBinarySegmentCount = () => {
     return items
-      .filter(item => item.category && BINARY_SEGMENTS.includes(item.category))
+      .filter(item => 
+        item.category && 
+        BINARY_SEGMENTS.includes(item.category) &&
+        item.groupNumber !== undefined &&
+        item.groupNumber % 2 === 1 // Solo grupos impares
+      )
       .reduce((total, item) => total + item.quantity, 0);
   };
 
