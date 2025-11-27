@@ -27,7 +27,7 @@ export const PlugCard = ({
   onRemove
 }: PlugCardProps) => {
   return (
-    <Card className="border-2 hover:border-accent/50 transition-colors">
+    <Card className="border-2 hover:border-accent/50 transition-colors shadow-none">
       <CardContent className="p-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1 flex flex-wrap gap-x-6 gap-y-3 text-sm">
