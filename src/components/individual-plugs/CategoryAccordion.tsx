@@ -7,7 +7,7 @@ interface CategoryAccordionProps {
   category: PlugCategory;
   items: any[];
   getItemQuantity: (id: string) => number;
-  onAddToCart: (plug: IndividualPlug) => void;
+  onAddToCart: (plug: IndividualPlug, category: string) => void;
   onIncrement: (id: string) => void;
   onDecrement: (id: string) => void;
   onQuantityChange: (id: string, value: string) => void;
@@ -53,7 +53,7 @@ export const CategoryAccordion = ({
               plug={plug}
               quantity={quantity}
               items={items}
-              onAddToCart={() => onAddToCart(plug)}
+              onAddToCart={() => onAddToCart(plug, category.categoria)}
               onIncrement={() => onIncrement(id)}
               onDecrement={() => onDecrement(id)}
               onQuantityChange={(value) => onQuantityChange(id, value)}

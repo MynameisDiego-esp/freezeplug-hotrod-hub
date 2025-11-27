@@ -6,6 +6,7 @@ export interface CartItem {
   quantity: number;
   type: 'set' | 'product' | 'individual';
   details?: string;
+  category?: string;
 }
 
 interface CartContextType {
@@ -17,7 +18,19 @@ interface CartContextType {
   getTotalItems: () => number;
   getTotalPlugs: () => number;
   getItemQuantity: (id: string) => number;
+  getBinarySegmentCount: () => number;
+  canSubmitOrder: () => { valid: boolean; message?: string };
 }
+
+const BINARY_SEGMENTS = [
+  "Steel Metric Cup Plugs",
+  "Pipe Plugs", 
+  "Brass Metric Cup Plugs",
+  "Concave Cup Plugs"
+];
+
+const MIN_BINARY_SEGMENTS = 100;
+const MIN_TOTAL_ORDER = 500;
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -62,9 +75,47 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return items.find(item => item.id === id)?.quantity || 0;
   };
 
+  const getBinarySegmentCount = () => {
+    return items
+      .filter(item => item.category && BINARY_SEGMENTS.includes(item.category))
+      .reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const canSubmitOrder = () => {
+    const totalPlugs = getTotalPlugs();
+    const binarySegmentCount = getBinarySegmentCount();
+
+    if (totalPlugs < MIN_TOTAL_ORDER) {
+      return {
+        valid: false,
+        message: `Pedido mínimo de ${MIN_TOTAL_ORDER} sellos. Actual: ${totalPlugs}`
+      };
+    }
+
+    if (binarySegmentCount < MIN_BINARY_SEGMENTS) {
+      return {
+        valid: false,
+        message: `Debes incluir mínimo ${MIN_BINARY_SEGMENTS} sellos de segmentos prioritarios. Actual: ${binarySegmentCount}`
+      };
+    }
+
+    return { valid: true };
+  };
+
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, clearCart, getTotalItems, getTotalPlugs, getItemQuantity }}
+      value={{ 
+        items, 
+        addItem, 
+        removeItem, 
+        updateQuantity, 
+        clearCart, 
+        getTotalItems, 
+        getTotalPlugs, 
+        getItemQuantity,
+        getBinarySegmentCount,
+        canSubmitOrder
+      }}
     >
       {children}
     </CartContext.Provider>
