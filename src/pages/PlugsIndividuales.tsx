@@ -26,7 +26,7 @@ const PlugsIndividuales = () => {
     "Acero Inoxidable": "Stainless Steel Cup Plugs",
     "Oro y Zinc": "Brass Cup Plugs",
     "Acero": "Steel Metric Cup Plugs",
-    "Cobre": "Copper Cup Plugs"
+    "Bronce": "Copper Cup Plugs"
   };
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
@@ -112,7 +112,7 @@ const PlugsIndividuales = () => {
                       { src: aceroInoxidableImage, name: "Acero Inoxidable" },
                       { src: oroYZincImage, name: "Oro y Zinc" },
                       { src: aceroImage, name: "Acero" },
-                      { src: cobreImage, name: "Cobre" }
+                      { src: cobreImage, name: "Bronce" }
                     ].map((material, index) => (
                       <button
                         key={index}
