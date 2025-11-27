@@ -5,7 +5,7 @@ import engineblock from "@/assets/engine-2.jpg";
 import freezePlugsHero from "@/assets/inicio1.jpg";
 import freezePlugsCollection from "@/assets/inicio2.jpg";
 import heroEngine from "@/assets/hero-engine.jpg";
-import componentHero from "@/assets/component-hero.png";
+import componentHero from "@/assets/component-hero-new.png";
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const backgroundImages = [heroEngine, freezePlugsHero, freezePlugsCollection, engineblock];
