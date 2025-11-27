@@ -42,25 +42,43 @@ export const CategoryAccordion = ({
           </p>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="p-4 border-t border-border space-y-3">
-        {category.items.map((plug, plugIndex) => {
-          const id = plug.NumeroParte;
-          const quantity = getItemQuantity(id);
-          
-          return (
-            <PlugCard
-              key={plugIndex}
-              plug={plug}
-              quantity={quantity}
-              items={items}
-              onAddToCart={() => onAddToCart(plug, category.categoria)}
-              onIncrement={() => onIncrement(id)}
-              onDecrement={() => onDecrement(id)}
-              onQuantityChange={(value) => onQuantityChange(id, value)}
-              onRemove={() => onRemove(id)}
-            />
-          );
-        })}
+      <AccordionContent className="p-4 border-t border-border space-y-6">
+        {category.items.reduce((acc, plug, plugIndex) => {
+          const groupIndex = Math.floor(plugIndex / 5);
+          if (!acc[groupIndex]) {
+            acc[groupIndex] = [];
+          }
+          acc[groupIndex].push({ plug, plugIndex });
+          return acc;
+        }, [] as { plug: IndividualPlug; plugIndex: number }[][]).map((group, groupIndex) => (
+          <div key={groupIndex} className="space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-primary/30 to-transparent rounded-full" />
+              <span className="text-xs font-bold text-primary/70 px-2">
+                Grupo {groupIndex + 1}
+              </span>
+              <div className="h-[2px] flex-1 bg-gradient-to-l from-primary/30 to-transparent rounded-full" />
+            </div>
+            {group.map(({ plug, plugIndex }) => {
+              const id = plug.NumeroParte;
+              const quantity = getItemQuantity(id);
+              
+              return (
+                <PlugCard
+                  key={plugIndex}
+                  plug={plug}
+                  quantity={quantity}
+                  items={items}
+                  onAddToCart={() => onAddToCart(plug, category.categoria)}
+                  onIncrement={() => onIncrement(id)}
+                  onDecrement={() => onDecrement(id)}
+                  onQuantityChange={(value) => onQuantityChange(id, value)}
+                  onRemove={() => onRemove(id)}
+                />
+              );
+            })}
+          </div>
+        ))}
       </AccordionContent>
     </AccordionItem>
   );
