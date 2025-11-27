@@ -143,37 +143,19 @@ const PlugsIndividuales = () => {
                 </div>
               </div>
 
-              <Accordion type="single" collapsible className="space-y-8">
-                {filteredCategories.reduce((acc, category, categoryIndex) => {
-                  const groupIndex = Math.floor(categoryIndex / 5);
-                  if (!acc[groupIndex]) {
-                    acc[groupIndex] = [];
-                  }
-                  acc[groupIndex].push(category);
-                  return acc;
-                }, [] as typeof filteredCategories[]).map((group, groupIndex) => (
-                  <div key={groupIndex} className="space-y-4">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-1 flex-1 bg-gradient-to-r from-primary to-transparent rounded-full" />
-                      <h2 className="text-2xl font-black text-primary">
-                        Grupo {groupIndex + 1}
-                      </h2>
-                      <div className="h-1 flex-1 bg-gradient-to-l from-primary to-transparent rounded-full" />
-                    </div>
-                    {group.map((category, catIndex) => (
-                      <CategoryAccordion
-                        key={`${groupIndex}-${catIndex}`}
-                        category={category}
-                        items={items}
-                        getItemQuantity={getItemQuantity}
-                        onAddToCart={handleAddToCart}
-                        onIncrement={handleIncrement}
-                        onDecrement={handleDecrement}
-                        onQuantityChange={handleQuantityChange}
-                        onRemove={handleRemoveFromCart}
-                      />
-                    ))}
-                  </div>
+              <Accordion type="single" collapsible className="space-y-4">
+                {filteredCategories.map((category, categoryIndex) => (
+                  <CategoryAccordion
+                    key={categoryIndex}
+                    category={category}
+                    items={items}
+                    getItemQuantity={getItemQuantity}
+                    onAddToCart={handleAddToCart}
+                    onIncrement={handleIncrement}
+                    onDecrement={handleDecrement}
+                    onQuantityChange={handleQuantityChange}
+                    onRemove={handleRemoveFromCart}
+                  />
                 ))}
               </Accordion>
 
