@@ -18,7 +18,16 @@ import cobreImage from "@/assets/cobre.png";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("");
   const { addItem, getItemQuantity, updateQuantity, items, removeItem } = useCart();
+  
+  const materialToCategoryMap: Record<string, string> = {
+    "Pipe": "Pipe Plugs",
+    "Acero Inoxidable": "Stainless Steel Cup Plugs",
+    "Oro y Zinc": "Brass Cup Plugs",
+    "Acero": "Steel Metric Cup Plugs",
+    "Cobre": "Copper Cup Plugs"
+  };
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
@@ -68,6 +77,19 @@ const PlugsIndividuales = () => {
     toast.info("Eliminado del carrito");
   };
 
+  const handleMaterialClick = (materialName: string) => {
+    const categoryName = materialToCategoryMap[materialName];
+    if (categoryName) {
+      setActiveCategory(categoryName);
+      setTimeout(() => {
+        const element = document.getElementById(`category-${categoryName}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -92,7 +114,11 @@ const PlugsIndividuales = () => {
                       { src: aceroImage, name: "Acero" },
                       { src: cobreImage, name: "Cobre" }
                     ].map((material, index) => (
-                      <div key={index} className="group relative overflow-hidden rounded-lg aspect-square shadow-none">
+                      <button
+                        key={index}
+                        onClick={() => handleMaterialClick(material.name)}
+                        className="group relative overflow-hidden rounded-lg aspect-square shadow-none cursor-pointer transition-all hover:ring-2 hover:ring-primary"
+                      >
                         <img 
                           src={material.src} 
                           alt={`Tapones de ${material.name}`} 
@@ -101,7 +127,7 @@ const PlugsIndividuales = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 to-transparent flex items-end p-3">
                           <p className="text-background font-bold text-sm">{material.name}</p>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -144,19 +170,26 @@ const PlugsIndividuales = () => {
                 </div>
               </div>
 
-              <Accordion type="single" collapsible className="space-y-4">
+              <Accordion 
+                type="single" 
+                collapsible 
+                className="space-y-4"
+                value={activeCategory}
+                onValueChange={setActiveCategory}
+              >
                 {filteredCategories.map((category, categoryIndex) => (
-                  <CategoryAccordion
-                    key={categoryIndex}
-                    category={category}
-                    items={items}
-                    getItemQuantity={getItemQuantity}
-                    onAddToCart={handleAddToCart}
-                    onIncrement={handleIncrement}
-                    onDecrement={handleDecrement}
-                    onQuantityChange={handleQuantityChange}
-                    onRemove={handleRemoveFromCart}
-                  />
+                  <div key={categoryIndex} id={`category-${category.categoria}`}>
+                    <CategoryAccordion
+                      category={category}
+                      items={items}
+                      getItemQuantity={getItemQuantity}
+                      onAddToCart={handleAddToCart}
+                      onIncrement={handleIncrement}
+                      onDecrement={handleDecrement}
+                      onQuantityChange={handleQuantityChange}
+                      onRemove={handleRemoveFromCart}
+                    />
+                  </div>
                 ))}
               </Accordion>
 
