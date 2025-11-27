@@ -80,7 +80,8 @@ const Hero = () => {
               </div>
 
               <h1 className="text-2xl md:text-3xl lg:text-5xl font-black mb-2.5 text-white leading-tight animate-fade-in-up">
-                Sellos para<br />
+                Sellos para
+                <br />
                 <span className="text-primary">Monoblock</span>
               </h1>
 
@@ -90,8 +91,10 @@ const Hero = () => {
                   animationDelay: "0.2s",
                 }}
               >
-                ESPECIALISTAS EN SELLOS PARA MOTOR<br />
-                CON CALIDAD INTERNACIONAL<br />
+                ESPECIALISTAS EN SELLOS PARA MOTOR
+                <br />
+                CON CALIDAD INTERNACIONAL
+                <br />
                 DESDE 1967
               </p>
 
@@ -101,7 +104,12 @@ const Hero = () => {
                   animationDelay: "0.4s",
                 }}
               >
-                <Button variant="racing" size="lg" onClick={scrollToProducts} className="group text-lg px-8 py-6 h-auto animate-flash">
+                <Button
+                  variant="racing"
+                  size="lg"
+                  onClick={scrollToProducts}
+                  className="group text-lg px-8 py-6 h-auto animate-flash"
+                >
                   Ver Productos
                   <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform" />
                 </Button>
@@ -112,11 +120,11 @@ const Hero = () => {
             <div className="md:col-span-3 relative h-full min-h-[240px] md:min-h-[300px] bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-3 md:p-4">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-50"></div>
-                <img 
-                  src={componentHero} 
-                  alt="Componente esencial para motores reconstruidos" 
+                <img
+                  src={componentHero}
+                  alt="Componente esencial para motores reconstruidos"
                   className="relative w-full h-full object-contain drop-shadow-2xl"
-                  style={{ filter: 'contrast(1.2) brightness(1.1)' }}
+                  style={{ filter: "contrast(1.2) brightness(1.1)" }}
                 />
               </div>
             </div>
