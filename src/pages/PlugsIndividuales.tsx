@@ -22,7 +22,7 @@ const PlugsIndividuales = () => {
   
   const filteredCategories = usePlugsFilter(plugsData, searchTerm);
 
-  const handleAddToCart = (plug: IndividualPlug) => {
+  const handleAddToCart = (plug: IndividualPlug, category: string) => {
     const details = [
       plug.tipo,
       plug.Diametro_recomendado_del_cilindro && plug.Diametro_recomendado_del_cilindro > 0 
@@ -34,7 +34,8 @@ const PlugsIndividuales = () => {
       id: plug.NumeroParte,
       name: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`,
       type: 'individual',
-      details: details || plug.Tamaño_de_Sello
+      details: details || plug.Tamaño_de_Sello,
+      category: category
     });
     toast.success("Agregado al carrito", {
       description: `${plug.NumeroParte} - ${plug.Tamaño_de_Sello}`
@@ -112,6 +113,21 @@ const PlugsIndividuales = () => {
                     Para pedidos menores, consulte disponibilidad
                   </p>
                 </div>
+
+                <div className="bg-yellow-600/20 border-2 border-yellow-600 rounded-lg p-4 max-w-2xl mx-auto mb-8">
+                  <p className="font-bold text-lg">
+                    ⚡ Condición Obligatoria
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Mínimo 100 sellos de <span className="font-bold text-foreground">Segmentos Prioritarios</span>:
+                  </p>
+                  <ul className="text-xs text-muted-foreground mt-2 space-y-1 ml-4 list-disc">
+                    <li>Tapones Métricos de Acero (Steel Metric Cup Plugs)</li>
+                    <li>Tapones de Tubería (Pipe Plugs)</li>
+                    <li>Tapones Métricos de Latón (Brass Metric Cup Plugs)</li>
+                    <li>Tapones Cóncavos (Concave Cup Plugs)</li>
+                  </ul>
+                </div>
               </div>
 
               <div className="mb-8">
@@ -127,19 +143,37 @@ const PlugsIndividuales = () => {
                 </div>
               </div>
 
-              <Accordion type="single" collapsible className="space-y-4">
-                {filteredCategories.map((category, categoryIndex) => (
-                  <CategoryAccordion
-                    key={categoryIndex}
-                    category={category}
-                    items={items}
-                    getItemQuantity={getItemQuantity}
-                    onAddToCart={handleAddToCart}
-                    onIncrement={handleIncrement}
-                    onDecrement={handleDecrement}
-                    onQuantityChange={handleQuantityChange}
-                    onRemove={handleRemoveFromCart}
-                  />
+              <Accordion type="single" collapsible className="space-y-8">
+                {filteredCategories.reduce((acc, category, categoryIndex) => {
+                  const groupIndex = Math.floor(categoryIndex / 5);
+                  if (!acc[groupIndex]) {
+                    acc[groupIndex] = [];
+                  }
+                  acc[groupIndex].push(category);
+                  return acc;
+                }, [] as typeof filteredCategories[]).map((group, groupIndex) => (
+                  <div key={groupIndex} className="space-y-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-1 flex-1 bg-gradient-to-r from-primary to-transparent rounded-full" />
+                      <h2 className="text-2xl font-black text-primary">
+                        Grupo {groupIndex + 1}
+                      </h2>
+                      <div className="h-1 flex-1 bg-gradient-to-l from-primary to-transparent rounded-full" />
+                    </div>
+                    {group.map((category, catIndex) => (
+                      <CategoryAccordion
+                        key={`${groupIndex}-${catIndex}`}
+                        category={category}
+                        items={items}
+                        getItemQuantity={getItemQuantity}
+                        onAddToCart={handleAddToCart}
+                        onIncrement={handleIncrement}
+                        onDecrement={handleDecrement}
+                        onQuantityChange={handleQuantityChange}
+                        onRemove={handleRemoveFromCart}
+                      />
+                    ))}
+                  </div>
                 ))}
               </Accordion>
 
