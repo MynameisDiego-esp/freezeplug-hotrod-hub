@@ -10,7 +10,11 @@ import { toast } from "sonner";
 import { plugsData, IndividualPlug } from "@/data/plugsData";
 import { usePlugsFilter } from "@/hooks/usePlugsFilter";
 import { CategoryAccordion } from "@/components/individual-plugs/CategoryAccordion";
-import sellosImage from "@/assets/sellos13.jpeg";
+import pipeImage from "@/assets/pipe.png";
+import aceroInoxidableImage from "@/assets/acero-inoxidable.png";
+import oroYZincImage from "@/assets/oro-y-zinc.png";
+import aceroImage from "@/assets/acero.png";
+import cobreImage from "@/assets/cobre.png";
 
 const PlugsIndividuales = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -78,11 +82,26 @@ const PlugsIndividuales = () => {
                 </p>
                 
                 <div className="mb-8">
-                  <img 
-                    src={sellosImage} 
-                    alt="Tapones de congelación individuales de alta calidad" 
-                    className="w-full max-w-3xl mx-auto rounded-lg shadow-lg object-cover h-74"
-                  />
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+                    {[
+                      { src: pipeImage, name: "Pipe" },
+                      { src: aceroInoxidableImage, name: "Acero Inoxidable" },
+                      { src: oroYZincImage, name: "Oro y Zinc" },
+                      { src: aceroImage, name: "Acero" },
+                      { src: cobreImage, name: "Cobre" }
+                    ].map((material, index) => (
+                      <div key={index} className="group relative overflow-hidden rounded-lg aspect-square">
+                        <img 
+                          src={material.src} 
+                          alt={`Tapones de ${material.name}`} 
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 to-transparent flex items-end p-3">
+                          <p className="text-background font-bold text-sm">{material.name}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 
                 <div className="bg-accent/20 border-2 border-accent rounded-lg p-4 max-w-2xl mx-auto mb-8">
