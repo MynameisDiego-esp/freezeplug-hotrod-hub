@@ -81,8 +81,8 @@ const PlugsIndividuales = () => {
                   Selección completa de freeze plugs individuales para todas tus necesidades de reparación.
                 </p>
                 
-                <div className="mb-8">
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+                <div className="mb-12">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                     {[
                       { src: pipeImage, name: "Pipe" },
                       { src: aceroInoxidableImage, name: "Acero Inoxidable" },
@@ -90,14 +90,14 @@ const PlugsIndividuales = () => {
                       { src: aceroImage, name: "Acero" },
                       { src: cobreImage, name: "Cobre" }
                     ].map((material, index) => (
-                      <div key={index} className="group relative overflow-hidden rounded-lg aspect-square">
+                      <div key={index} className="group relative overflow-hidden rounded-xl aspect-[4/3] shadow-lg">
                         <img 
                           src={material.src} 
                           alt={`Tapones de ${material.name}`} 
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 to-transparent flex items-end p-3">
-                          <p className="text-background font-bold text-sm">{material.name}</p>
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 to-transparent flex items-end p-4">
+                          <p className="text-background font-bold text-base md:text-lg">{material.name}</p>
                         </div>
                       </div>
                     ))}
