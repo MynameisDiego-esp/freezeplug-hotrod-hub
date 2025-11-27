@@ -90,7 +90,7 @@ const PlugsIndividuales = () => {
                       { src: aceroImage, name: "Acero" },
                       { src: cobreImage, name: "Cobre" }
                     ].map((material, index) => (
-                      <div key={index} className="group relative overflow-hidden rounded-lg aspect-square">
+                      <div key={index} className="group relative overflow-hidden rounded-lg aspect-square shadow-none">
                         <img 
                           src={material.src} 
                           alt={`Tapones de ${material.name}`} 
