@@ -44,7 +44,7 @@ const Hero = () => {
             className="w-full h-full flex-shrink-0 relative"
             style={{
               backgroundImage: `url(${image})`,
-              backgroundSize: "cover",
+              backgroundSize: "100%",
               backgroundPosition: "center",
             }}
           />
@@ -68,61 +68,57 @@ const Hero = () => {
       </button>
 
       {/* Contenido principal */}
-      <div className="relative z-20 container mx-auto px-4 py-20">
-        <div className="max-w-6xl mx-auto bg-black backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
-          <div className="grid md:grid-cols-3 min-h-[500px]">
+      <div className="relative z-20 container mx-auto px-4 md:px-6 py-12">
+        <div className="max-w-3xl ml-0 mr-auto bg-black/95 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden border border-white/10">
+          <div className="grid md:grid-cols-5 min-h-[300px] md:min-h-[360px]">
             {/* Columna izquierda - Texto */}
-            <div className="md:col-span-2 flex flex-col justify-center p-6 md:p-8 text-center md:text-left">
-              <div className="inline-block mb-4 animate-fade-in">
-                <span className="text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 bg-primary/10 border-2 border-primary rounded-full">
-                  Ingeniería Premium
+            <div className="md:col-span-2 flex flex-col justify-center p-4 md:p-5 text-center md:text-left border-r border-white/10">
+              <div className="inline-block mb-2.5 animate-fade-in">
+                <span className="text-primary text-s font-bold uppercase tracking-widest px-3.5 py-1 bg-primary/10 border-2 border-primary rounded-full">
+                  Ingeniería PROKAR
                 </span>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-black mb-4 text-white animate-fade-in-up">
-                Sellos para <span className="text-primary">Monoblock</span>
+              <h1 className="text-2xl md:text-3xl lg:text-5xl font-black mb-2.5 text-white leading-tight animate-fade-in-up">
+                Sellos para<br />
+                <span className="text-primary">Monoblock</span>
               </h1>
 
               <p
-                className="text-base md:text-lg mb-6 text-gray-200 animate-fade-in-up"
+                className="text-base md:text-lg lg:text-xl mb-4 text-gray-300 leading-relaxed animate-fade-in-up"
                 style={{
                   animationDelay: "0.2s",
                 }}
               >
-                ESPECIALISTAS EN SELLOS PARA MOTOR CON CALIDAD INTERNACIONAL DESDE 1967
+                ESPECIALISTAS EN SELLOS PARA MOTOR<br />
+                CON CALIDAD INTERNACIONAL<br />
+                DESDE 1967
               </p>
 
               <div
-                className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start animate-fade-in-up"
+                className="flex justify-center md:justify-start animate-fade-in-up"
                 style={{
                   animationDelay: "0.4s",
                 }}
               >
-                <Button variant="racing" size="lg" onClick={scrollToProducts} className="group">
+                <Button variant="racing" size="lg" onClick={scrollToProducts} className="group text-lg px-8 py-6 h-auto animate-flash">
                   Ver Productos
-                  <ArrowDown className="ml-2 group-hover:translate-y-1 transition-transform" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() =>
-                    document.getElementById("order-form")?.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                >
-                  Solicitar Cotización
+                  <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform" />
                 </Button>
               </div>
             </div>
 
             {/* Columna derecha - Imagen */}
-            <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-black flex items-center justify-center p-4">
-              <img 
-                src={componentHero} 
-                alt="Componente esencial para motores reconstruidos" 
-                className="w-full h-full object-contain"
-              />
+            <div className="md:col-span-3 relative h-full min-h-[240px] md:min-h-[300px] bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-3 md:p-4">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-50"></div>
+                <img 
+                  src={componentHero} 
+                  alt="Componente esencial para motores reconstruidos" 
+                  className="relative w-full h-full object-contain drop-shadow-2xl"
+                  style={{ filter: 'contrast(1.2) brightness(1.1)' }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -154,8 +150,13 @@ const Hero = () => {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes flash {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
         .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
         .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; opacity: 0; }
+        .animate-flash { animation: flash 1.5s ease-in-out infinite; }
       `}</style>
     </section>
   );
